@@ -1,0 +1,5 @@
+---
+extends: availity/browser
+rules:
+  linebreak-style: 0
+  no-alert: 0
