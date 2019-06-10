@@ -1,5 +1,5 @@
 {
-  "name": "@availity/react-template-simple",
+  "name": "availity-starter-react",
   "private": true,
   "version": "5.3.4",
   "description": "React project using @availity/workflow",
