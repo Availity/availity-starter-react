@@ -28,6 +28,10 @@
     "availity",
     "workflow"
   ],
+  "resolutions": {
+    "browserslist": "4.6.2",
+    "caniuse-lite": "1.0.30000974"
+  },
   "license": "MIT",
   "homepage": "https://github.com/availity/availity-workflow#readme",
   "dependencies": {
@@ -36,31 +40,28 @@
     "@availity/breadcrumbs": "^3.0.1",
     "@availity/env-var": "^1.6.0",
     "@availity/localstorage-core": "^2.5.0",
-    "@availity/page-header": "^4.4.1",
-    "@availity/reactstrap-validation-select": "^3.0.0",
-    "@availity/spaces": "^1.1.1",
-    "@availity/typography": "^1.1.1",
-    "@reach/router": "^1.2.1",
-    "availity-reactstrap-validation": "^2.0.2",
+    "@availity/page-header": "^4.4.5",
+    "@availity/spaces": "^2.0.0",
+    "availity-reactstrap-validation": "^2.5.4",
     "availity-uikit": "^3.0.0",
     "axios": "^0.18.0",
+    "classnames": "^2.2.6",
     "hash-source": "^1.0.4",
     "lodash.get": "^4.4.2",
     "lodash.set": "^4.3.2",
     "prop-types": "^15.5.7",
     "query-string": "^6.5.0",
     "react": "^16.8.3",
-    "react-block-ui": "^1.1.1",
     "react-dom": "^16.8.3",
-    "react-select": "^2.0.0",
-    "react-transition-group": "^2.3.1",
-    "reactstrap": "^8.0.0"
+    "reactstrap": "^8.0.0",
+    "styled-components": "^4.3.2"
   },
   "devDependencies": {
-    "@availity/workflow": "^5.3.4",
-    "@availity/workflow-plugin-react": "^5.3.4",
+    "@availity/workflow": "^5.3.9",
+    "@availity/workflow-plugin-react": "^5.3.9",
     "@testing-library/react": "^8.0.1",
     "cross-env": "^5.1.4",
+    "eslint-config-availity": "^4.0.7",
     "jest-dom": "^3.0.0"
   },
   "availityWorkflow": {

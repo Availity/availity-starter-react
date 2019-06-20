@@ -1,15 +1,15 @@
 import React from 'react';
 import { render, cleanup, waitForElement } from '@testing-library/react';
-import { LocationProvider } from '@reach/router';
 import axiosMock from 'axios';
 import slotmachineResponse from '../data/slotmachine.json';
 import App from './App';
-import hashHistory from './hashHistory';
 
 jest.mock('axios');
 
+delete global.window.location
+global.window.location = { href: 'http://localhost/?spaceId=48C607A70B5A46A3864A34E2BDDDEA04' }
+
 const renderSso = async () => {
-  hashHistory.navigate('/?spaceId=48C607A70B5A46A3864A34E2BDDDEA04');
 
   axiosMock.mockResolvedValue({
     config: { polling: false },
@@ -18,11 +18,7 @@ const renderSso = async () => {
     statusText: 'Ok',
   });
 
-  const { getByTestId, ...rest } = render(
-    <LocationProvider history={hashHistory}>
-      <App />
-    </LocationProvider>
-  );
+  const { getByTestId, ...rest } = render(<App />);
 
   await waitForElement(() => getByTestId('sso-container'));
 
