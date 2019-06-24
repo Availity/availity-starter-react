@@ -16,11 +16,12 @@ Item.propTypes = {
   name: PropTypes.string,
   value: PropTypes.string,
   children: PropTypes.node,
-  className: PropTypes.string
-}
+  className: PropTypes.string,
+};
 
-export default () => (
+const MemberInfo = ({ isFlippable }) => (
   <FlipCard
+    isFlippable={isFlippable}
     front={({ toggle }) => (
       <Card style={{ height: 293 }}>
         <CardHeader className="d-flex align-items-center justify-content-between">
@@ -28,9 +29,13 @@ export default () => (
             style={{ height: 40 }}
             fallback="https://www.cmsimaging.com/assets/img/brands/authpal/availity.png"
           />
-          <Button color="primary" onClick={toggle}>
-            Go To Back
-          </Button>
+          {isFlippable ? (
+            <Button color="link" onClick={toggle}>
+              Go To Back
+            </Button>
+          ) : (
+            'Front'
+          )}
         </CardHeader>
         <Row tag={CardBody} style={{ height: '100%' }}>
           <Col xs={5} className="border-bottom mb-2 pb-2">
@@ -63,9 +68,13 @@ export default () => (
             style={{ height: 40 }}
             fallback="https://www.cmsimaging.com/assets/img/brands/authpal/availity.png"
           />
-          <Button color="primary" onClick={toggle}>
-            Go To Front
-          </Button>
+          {isFlippable ? (
+            <Button color="link" onClick={toggle}>
+              Go To Front
+            </Button>
+          ) : (
+            'Back'
+          )}
         </CardHeader>
         <Row tag={CardBody} style={{ height: '100%' }}>
           <Col xs={8} className="mb-2 pb-2">
@@ -88,3 +97,9 @@ export default () => (
     )}
   />
 );
+
+MemberInfo.propTypes = {
+  isFlippable: PropTypes.bool,
+};
+
+export default MemberInfo;
