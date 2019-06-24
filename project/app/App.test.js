@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, cleanup, waitForElement } from '@testing-library/react';
+import { render, cleanup, waitForElement, fireEvent } from '@testing-library/react';
 import axiosMock from 'axios';
 import slotmachineResponse from '../data/slotmachine.json';
 import App from './App';
@@ -29,10 +29,11 @@ afterEach(() => {
   cleanup();
 });
 
-describe('SsoForm', () => {
+describe('ID Card Viewer', () => {
   test('renders', async () => {
     const { getByText } = await renderSso();
 
     await waitForElement(() => getByText('My Health Plan'));
   });
+
 });
