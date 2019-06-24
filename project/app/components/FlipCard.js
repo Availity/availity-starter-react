@@ -7,7 +7,7 @@ import styled from 'styled-components';
 const FlipCard = styled.div`
   /* The flip card container - set the width and height to whatever you want. We have added the border property to demonstrate that the flip itself goes out of the box on hover (remove perspective if you don't want the 3D effect */
   .flip-card {
-    ${({ isFlippable }) => isFlippable && "height:293px"};
+    height: 293px;
     perspective: 1000px; /* Remove this if you don't want the 3D effect */
   }
 
@@ -18,20 +18,20 @@ const FlipCard = styled.div`
     height: 100%;
     transition: transform 0.8s;
     transform-style: preserve-3d;
-    transform: ${({ flip, isFlippable }) => (isFlippable && flip ? 'rotateY(180deg)' : 'rotateY(0deg)')};
+    transform: ${({ flip }) => (flip ? 'rotateY(180deg)' : 'rotateY(0deg)')};
   }
 
   /* Position the front and back side */
   .flip-card-front,
   .flip-card-back {
-    position: ${({ isFlippable }) => isFlippable ? 'absolute':'inherit'};
+    position: absolute;
     backface-visibility: hidden;
     height: 100%;
   }
 
   /* Style the back side */
   .flip-card-back {
-  transform: ${({ isFlippable}) => isFlippable ? 'rotateY(180deg)':'rotateY(0deg)'};
+    transform: rotateY(180deg);
   }
 `;
 
@@ -40,21 +40,25 @@ const FlipCardComponent = ({ front: Front, back: Back, isFlippable }) => {
 
   const toggle = () => setFlip(!flip);
 
+  const Tag = isFlippable ? FlipCard : 'div';
+
   return (
-    <FlipCard flip={flip} isFlippable={isFlippable}>
+    <Tag flip={flip}>
       <div className="flip-card">
         <div className="flip-card-inner">
           <div className="flip-card-front">
             <Front toggle={toggle} />
           </div>
-          <div className={classNames("flip-card-back",{
-            'mt-3': !isFlippable
-          })}>
+          <div
+            className={classNames('flip-card-back', {
+              'mt-3': !isFlippable,
+            })}
+          >
             <Back toggle={toggle} />
           </div>
         </div>
       </div>
-    </FlipCard>
+    </Tag>
   );
 };
 
