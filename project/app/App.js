@@ -2,12 +2,24 @@ import React, { useState } from 'react';
 import { Container, Button, Card } from 'reactstrap';
 import PageHeader from '@availity/page-header';
 import Spaces from '@availity/spaces';
-import { AvForm, AvField } from 'availity-reactstrap-validation';
+import { Form, Field } from '@availity/form';
 import qs from 'query-string';
+import * as yup from 'yup';
 import MemberInfo from './components/MemberInfo';
 import Footer from './components/Footer';
 
 const getQueryString = pathname => pathname.substring(pathname.lastIndexOf('?'), pathname.length);
+
+const schema = yup.object().shape({
+  memberId: yup
+    .string()
+    .isRequired(true, 'This Field is Required.')
+    .matches(/^\d{8}$/, 'Member ID must be 8 digits.'),
+  zipCode: yup
+    .string()
+    .isRequired(true, 'This Field is Required.')
+    .matches(/^\d{5}(?:-\d{4})?$/, 'Valid Zip Code Formats: 12345 or 12345-6789'),
+});
 
 export default () => {
   const queryParams = qs.parse(getQueryString(window.location.href));
@@ -22,47 +34,25 @@ export default () => {
         <PageHeader appName="ID Card Viewer" spaceId={queryParams.spaceId} />
         {!memberInfo ? (
           <Card body>
-            <AvForm
-              onValidSubmit={() =>
+            <Form
+              initialValues={{
+                memberId: '',
+                zipCode: '',
+              }}
+              validationSchema={schema}
+              onSubmit={() =>
                 setMemberInfo({
                   name: 'John Doe',
                 })
               }
             >
-              <AvField
-                name="memberId"
-                type="text"
-                label="Member ID"
-                validate={{
-                  pattern: { value: '[0-9]{8}', errorMessage: 'Member ID must be at least 8 digits' },
-                  required: {
-                    value: true,
-                    errorMessage: 'This Field is Required.',
-                  },
-                  number: {
-                    value: true,
-                    errorMessage: 'Member ID only consists of digits.',
-                  },
-                }}
-              />
-              <AvField
-                name="zipCode"
-                type="text"
-                label="Zip Code"
-                validate={{
-                  pattern: { value: '^[0-9]{5}(?:-[0-9]{4})?$' },
-                  required: {
-                    value: true,
-                    errorMessage: 'This Field is Required.',
-                  },
-                  number: true,
-                }}
-              />
+              <Field name="memberId" type="text" label="Member ID" />
+              <Field name="zipCode" type="text" label="Zip Code" />
 
               <Button type="submit" color="primary" className="float-right">
                 View Member Card
               </Button>
-            </AvForm>
+            </Form>
           </Card>
         ) : (
           <>
