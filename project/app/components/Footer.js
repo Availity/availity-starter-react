@@ -9,7 +9,7 @@ const Footer = ({ toggleFlippable }) => (
     by{' '}
     <AvLink url="https://www.availity.com" target="_blank">
       Availity
-    </Link>{' '}
+    </AvLink>{' '}
     2019
   </p>
 );
