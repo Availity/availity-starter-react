@@ -65,6 +65,7 @@ const FlipCardComponent = ({ front: Front, back: Back, isFlippable }) => {
 FlipCardComponent.propTypes = {
   front: PropTypes.func,
   back: PropTypes.func,
+  isFlippable: PropTypes.bool
 };
 
 export default FlipCardComponent;
