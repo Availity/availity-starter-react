@@ -2,5 +2,3 @@
 extends: availity/browser
 rules:
   unicorn/prefer-query-selector: off
-env:
-  node: true
