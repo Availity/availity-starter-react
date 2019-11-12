@@ -71,9 +71,7 @@
     "eslint-config-availity": "^5.2.3",
     "jest-dom": "^4.0.0"
   },
-  "availityWorkflow": {
-    "plugin": "@availity/workflow-plugin-react"
-  },
+  "availityWorkflow": true,
   "lint-staged": {
     "*.js": [
       "prettier --write",
