@@ -8,7 +8,7 @@ import * as yup from 'yup';
 import MemberInfo from './components/MemberInfo';
 import Footer from './components/Footer';
 
-const getQueryString = pathname => pathname.substring(pathname.lastIndexOf('?'), pathname.length);
+const getQueryString = pathname => pathname.slice(pathname.lastIndexOf('?'), pathname.length);
 
 const schema = yup.object().shape({
   memberId: yup
