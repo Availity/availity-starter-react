@@ -3,14 +3,14 @@ import { render, cleanup, waitForElement } from '@testing-library/react';
 import axiosMock from 'axios';
 import slotmachineResponse from '../data/slotmachine.json';
 import App from './App';
+import { StoreProvider } from './stores';
 
 jest.mock('axios');
 
-delete global.window.location
-global.window.location = { href: 'http://localhost/?spaceId=48C607A70B5A46A3864A34E2BDDDEA04' }
+delete global.window.location;
+global.window.location = { href: 'http://localhost/?spaceId=48C607A70B5A46A3864A34E2BDDDEA04' };
 
 const renderSso = async () => {
-
   axiosMock.mockResolvedValue({
     config: { polling: false },
     data: slotmachineResponse,
@@ -18,7 +18,11 @@ const renderSso = async () => {
     statusText: 'Ok',
   });
 
-  const { getByTestId, ...rest } = render(<App />);
+  const { getByTestId, ...rest } = render(
+    <StoreProvider>
+      <App />
+    </StoreProvider>
+  );
 
   await waitForElement(() => getByTestId('sso-container'));
 
@@ -35,5 +39,4 @@ describe('ID Card Viewer', () => {
 
     await waitForElement(() => getByText('My Health Plan'));
   });
-
 });

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { useAppStore } from '@/hooks';
 
 // Motivation https://davidwalsh.name/css-flip
 const FlipCard = styled.div`
@@ -35,15 +36,16 @@ const FlipCard = styled.div`
   }
 `;
 
-const FlipCardComponent = ({ front: Front, back: Back, isFlippable }) => {
+const FlipCardComponent = ({ front: Front, back: Back }) => {
   const [flip, setFlip] = useState(false);
+  const { isFlippable } = useAppStore(store => ({ isFlippable: store.isFlippable }));
 
   const toggle = () => setFlip(!flip);
 
   const Tag = isFlippable ? FlipCard : 'div';
 
   return (
-    <Tag flip={flip}>
+    <Tag flip={isFlippable ? flip : undefined}>
       <div className="flip-card">
         <div className="flip-card-inner">
           <div className="flip-card-front">
@@ -65,7 +67,6 @@ const FlipCardComponent = ({ front: Front, back: Back, isFlippable }) => {
 FlipCardComponent.propTypes = {
   front: PropTypes.func,
   back: PropTypes.func,
-  isFlippable: PropTypes.bool
 };
 
 export default FlipCardComponent;

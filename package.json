@@ -39,8 +39,8 @@
     "@availity/api-core": "^6.0.1",
     "@availity/breadcrumbs": "^3.1.5",
     "@availity/env-var": "^1.9.2",
-    "@availity/form": "^0.4.9",
-    "@availity/icon": "^0.6.2",
+    "@availity/form": "^0.5.1",
+    "@availity/icon": "^0.7.0",
     "@availity/link": "^2.0.1",
     "@availity/localstorage-core": "^3.0.0",
     "@availity/page-header": "^10.0.0",
@@ -55,13 +55,15 @@
     "hash-source": "^1.0.4",
     "lodash.get": "^4.4.2",
     "lodash.set": "^4.3.2",
+    "mobx": "^4.15.1",
+    "mobx-react-lite": "^1.5.2",
     "prop-types": "^15.7.2",
     "query-string": "^6.9.0",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
     "reactstrap": "^8.1.1",
     "styled-components": "^4.4.1",
-    "yup": "^0.27.0"
+    "yup": "^0.28.0"
   },
   "devDependencies": {
     "@availity/workflow": "^7.2.0",

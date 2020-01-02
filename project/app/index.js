@@ -4,5 +4,11 @@ import 'availity-uikit/scss/_bootstrap.scss';
 import '@availity/yup';
 import './index.scss';
 import App from './App';
+import { StoreProvider } from './stores';
 
-render(<App />, document.querySelector('#root'));
+render(
+  <StoreProvider>
+    <App />
+  </StoreProvider>,
+  document.querySelector('#root')
+);
