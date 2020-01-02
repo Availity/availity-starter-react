@@ -1,0 +1,4 @@
+---
+extends: availity/workflow
+rules:
+  unicorn/prefer-query-selector: off
