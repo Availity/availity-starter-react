@@ -1,5 +1,6 @@
 import React from 'react';
 import { render, cleanup, waitForElement } from '@testing-library/react';
+import { HashRouter as Router, Route } from 'react-router-dom';
 import axiosMock from 'axios';
 import slotmachineResponse from '../data/slotmachine.json';
 import App from './App';
@@ -20,7 +21,11 @@ const renderSso = async () => {
 
   const { getByTestId, ...rest } = render(
     <StoreProvider>
-      <App />
+      <Router>
+        <Route path="/">
+          <App />
+        </Route>
+      </Router>
     </StoreProvider>
   );
 
