@@ -11,7 +11,7 @@ Example Project running an ID Card Viewer App.
 ### Running
 
 ```bash
-$ yarn install
+$ yarn
 $ yarn start
 ```
 
