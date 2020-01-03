@@ -3,12 +3,9 @@ import { Container, Button, Card } from 'reactstrap';
 import PageHeader from '@availity/page-header';
 import Spaces from '@availity/spaces';
 import { Form, Field } from '@availity/form';
-import qs from 'query-string';
 import * as yup from 'yup';
 import { Footer, MemberInfo } from '@/components';
-import { useAppStore } from '@/hooks';
-
-const getQueryString = pathname => pathname.slice(pathname.lastIndexOf('?'), pathname.length);
+import { useMemberInfo, useQueryParams } from '@/hooks';
 
 const schema = yup.object().shape({
   memberId: yup
@@ -22,11 +19,8 @@ const schema = yup.object().shape({
 });
 
 export default () => {
-  const queryParams = qs.parse(getQueryString(window.location.href));
-  const { memberInfo, setMemberInfo } = useAppStore(store => ({
-    memberInfo: store.memberInfo,
-    setMemberInfo: store.setMemberInfo,
-  }));
+  const queryParams = useQueryParams();
+  const [memberInfo, setMemberInfo] = useMemberInfo();
 
   const handleSubmit = values => {
     setMemberInfo({
