@@ -20,6 +20,7 @@
     "build:production": "cross-env NODE_ENV=production av build",
     "build:staging": "cross-env NODE_ENV=staging av build",
     "release": "av release",
+    "prettier": "prettier --write '**/*.{ts,tsx,js,scss}'",
     "production": "cross-env NODE_ENV=production av release",
     "staging": "cross-env NODE_ENV=staging av release"
   },
