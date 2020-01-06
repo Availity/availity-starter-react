@@ -8,7 +8,7 @@ import { StoreProvider } from './stores';
 
 jest.mock('axios');
 
-delete global.window.location;
+// delete global.window.location;
 global.window.location = { href: 'http://localhost/?spaceId=48C607A70B5A46A3864A34E2BDDDEA04' };
 
 const renderSso = async () => {
@@ -40,8 +40,8 @@ afterEach(() => {
 
 describe('ID Card Viewer', () => {
   test('renders', async () => {
-    const { getByText } = await renderSso();
+    const { getAllByText } = await renderSso();
 
-    await waitForElement(() => getByText('My Health Plan'));
+    await waitForElement(() => getAllByText('ID Card Viewer'));
   });
 });
