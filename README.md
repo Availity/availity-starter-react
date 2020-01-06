@@ -27,3 +27,31 @@ This template makes use of `mobx` and `mobx-react-lite`. The implementation is m
   - This can be done by either modifying the function `useLocalStore` takes in or by creating another local store to pass to the `value` prop.
 - Add a hook in `project/app/hooks` to observe the store
   - The hook should take in a function which is a selector. This way we can only observe the data we need for that component, instead of the whole store.
+
+#### Class vs Function Components
+
+`mobx-react-lite` was built specifically for function components and hooks. If you need or plan on using Class Components then you will need to replace `mobx-react-lite` with `mobx-react`.
+
+### Dev Tools
+
+This template uses the following tools to aid in the development process.
+
+- [husky](https://github.com/typicode/husky#readme)
+- [commitlint](https://github.com/conventional-changelog/commitlint#readme)
+- [lint-staged](https://github.com/okonet/lint-staged#readme)
+
+### Committing Code to Git
+
+Use conventional commits messages following [Angular commit message style](https://github.com/angular/angular/blob/master/CONTRIBUTING.md). This project has pre-commit hook (using [husky](https://github.com/typicode/husky) and [lint-stage](https://github.com/okonet/lint-staged)) and that should enforce the Angular commit conventions.
+
+- **build**: Changes that affect the build system or external dependencies (example scopes: gulp, broccoli, npm)
+- **ci**: Changes to our CI configuration files and scripts (example scopes: Circle, BrowserStack, SauceLabs)
+- **docs**: Documentation only changes
+- **feat**: A new feature
+- **fix**: A bug fix
+- **perf**: A code change that improves performance
+- **refactor**: A code change that neither fixes a bug nor adds a feature
+- **style**: Changes that do not affect the meaning of the code (white-space, formatting, missing semi-colons, etc)
+- **test**: Adding missing tests or correcting existing tests
+
+Give detailed descriptions in your commit messages.
