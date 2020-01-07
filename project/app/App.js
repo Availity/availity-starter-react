@@ -1,14 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Container, Button, Card } from 'reactstrap';
 import PageHeader from '@availity/page-header';
 import Spaces from '@availity/spaces';
 import { Form, Field } from '@availity/form';
-import qs from 'query-string';
 import * as yup from 'yup';
-import MemberInfo from './components/MemberInfo';
-import Footer from './components/Footer';
-
-const getQueryString = pathname => pathname.slice(pathname.lastIndexOf('?'), pathname.length);
+import { Footer, MemberInfo } from '@/components';
+import { useMemberInfo, useQueryParams } from '@/hooks';
 
 const schema = yup.object().shape({
   memberId: yup
@@ -22,11 +19,15 @@ const schema = yup.object().shape({
 });
 
 export default () => {
-  const queryParams = qs.parse(getQueryString(window.location.href));
-  const [memberInfo, setMemberInfo] = useState(null);
-  const [flippable, setFlippable] = useState(false);
+  const queryParams = useQueryParams();
+  const [memberInfo, setMemberInfo] = useMemberInfo();
 
-  const toggleFlippable = () => setFlippable(!flippable);
+  const handleSubmit = values => {
+    setMemberInfo({
+      ...values,
+      name: 'John Doe',
+    });
+  };
 
   return (
     <Container data-testid="sso-container" className="container-sm">
@@ -40,15 +41,10 @@ export default () => {
                 zipCode: '',
               }}
               validationSchema={schema}
-              onSubmit={() =>
-                setMemberInfo({
-                  name: 'John Doe',
-                })
-              }
+              onSubmit={handleSubmit}
             >
               <Field name="memberId" type="text" label="Member ID" />
               <Field name="zipCode" type="text" label="Zip Code" />
-
               <Button type="submit" color="primary" className="float-right">
                 View Member Card
               </Button>
@@ -56,7 +52,7 @@ export default () => {
           </Card>
         ) : (
           <>
-            <MemberInfo {...memberInfo} isFlippable={flippable} />
+            <MemberInfo />
             <div className="d-flex justify-content-end">
               <Button className="mt-3" onClick={() => setMemberInfo(null)} color="primary">
                 Go Back
@@ -65,7 +61,7 @@ export default () => {
           </>
         )}
       </Spaces>
-      <Footer toggleFlippable={toggleFlippable} />
+      <Footer />
     </Container>
   );
 };
