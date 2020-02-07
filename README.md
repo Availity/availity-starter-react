@@ -38,6 +38,20 @@ This template makes use of `mobx` and `mobx-react-lite`. The implementation is m
 
 **A:** Yes. The intention of the `StoreProvider` is to be out of sight and out of mind. We have the provider to make mocking values easier in tests.
 
+**Q:** Where are the decorators (action, computed, etc.)?
+
+**A:** Forget about them. `useLocalStore` assigns them to the object created by the function passed to it.
+
+```js
+const createStore = () => ({
+  id: '', // observable
+  loading: false, // observable
+  setId() {}, // action
+  async fetch(), // action
+  get isLoggedIn() {}, // computed
+});
+```
+
 **Q:** How do I use `useAppStore`?
 
 **A:** The hook `useAppStore` accepts one argument. This is a selctor function which returns the data we want to obsererve. In the example below, we use the implicit return of arrow functions to return an object.
