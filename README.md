@@ -54,7 +54,7 @@ const createStore = () => ({
 
 **Q:** How do I use `useAppStore`?
 
-**A:** The hook `useAppStore` accepts one argument. This is a selctor function which returns the data we want to obsererve. In the example below, we use the implicit return of arrow functions to return an object.
+**A:** The hook `useAppStore` accepts one argument. This is a selector function which returns the data we want to observe. In the example below, we use the implicit return of arrow functions to return an object.
 
 ```js
 const { id, name, getSomething } = useAppStore(store => ({
