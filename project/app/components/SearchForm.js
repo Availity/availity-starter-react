@@ -21,8 +21,8 @@ async function stall(stallTime = 3000) {
 
 const SearchForm = () => {
   const { memberId, zipCode, setLoading, setMemberInfo } = useAppStore(store => ({
-    memberId: store.memberInfo ? store.memberInfo.memberId : '',
-    zipCode: store.memberInfo ? store.memberInfo.zipCode : '',
+    memberId: store.memberInfo?.memberId || '',
+    zipCode: store.memberInfo?.zipCode || '',
     setLoading: store.setLoading,
     setMemberInfo: store.setMemberInfo,
   }));
