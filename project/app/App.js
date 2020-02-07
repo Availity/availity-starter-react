@@ -1,67 +1,42 @@
 import React from 'react';
-import { Container, Button, Card } from 'reactstrap';
+import { Container, Button } from 'reactstrap';
 import PageHeader from '@availity/page-header';
 import Spaces from '@availity/spaces';
-import { Form, Field } from '@availity/form';
-import * as yup from 'yup';
-import { Footer, MemberInfo } from '@/components';
-import { useMemberInfo, useQueryParams } from '@/hooks';
+import BlockUi from 'react-block-ui';
+import { Footer, MemberInfo, SearchForm } from '@/components';
+import { useAppStore, useQueryParams } from '@/hooks';
 
-const schema = yup.object().shape({
-  memberId: yup
-    .string()
-    .isRequired(true, 'This Field is Required.')
-    .matches(/^\d{8}$/, 'Member ID must be 8 digits.'),
-  zipCode: yup
-    .string()
-    .isRequired(true, 'This Field is Required.')
-    .matches(/^\d{5}(?:-\d{4})?$/, 'Valid Zip Code Formats: 12345 or 12345-6789'),
-});
-
-export default () => {
+const App = () => {
   const queryParams = useQueryParams();
-  const [memberInfo, setMemberInfo] = useMemberInfo();
 
-  const handleSubmit = values => {
-    setMemberInfo({
-      ...values,
-      name: 'John Doe',
-    });
-  };
+  const { clearMemberInfo, hasMemberInfo, loading } = useAppStore(store => ({
+    clearMemberInfo: () => store.setMemberInfo(),
+    hasMemberInfo: store.hasMemberInfo,
+    loading: store.loading,
+  }));
 
   return (
     <Container data-testid="sso-container" className="container-sm">
       <Spaces spaceIds={[queryParams.spaceId]} clientId="test">
         <PageHeader appName="ID Card Viewer" spaceId={queryParams.spaceId} />
-        {!memberInfo ? (
-          <Card body>
-            <Form
-              initialValues={{
-                memberId: '',
-                zipCode: '',
-              }}
-              validationSchema={schema}
-              onSubmit={handleSubmit}
-            >
-              <Field name="memberId" type="text" label="Member ID" />
-              <Field name="zipCode" type="text" label="Zip Code" />
-              <Button type="submit" color="primary" className="float-right">
-                View Member Card
-              </Button>
-            </Form>
-          </Card>
-        ) : (
-          <>
-            <MemberInfo />
-            <div className="d-flex justify-content-end">
-              <Button className="mt-3" onClick={() => setMemberInfo(null)} color="primary">
-                Go Back
-              </Button>
-            </div>
-          </>
-        )}
+        <BlockUi blocking={loading}>
+          {!hasMemberInfo ? (
+            <SearchForm />
+          ) : (
+            <>
+              <MemberInfo />
+              <div className="d-flex justify-content-end">
+                <Button className="mt-3" onClick={clearMemberInfo} color="primary">
+                  Go Back
+                </Button>
+              </div>
+            </>
+          )}
+        </BlockUi>
       </Spaces>
       <Footer />
     </Container>
   );
 };
+
+export default App;
