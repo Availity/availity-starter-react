@@ -3,7 +3,7 @@ module.exports = config => {
 
   config.development.hotLoader = {
     enabled: true,
-    experimental: true,
+    experimental: false,
   };
 
   return config;
