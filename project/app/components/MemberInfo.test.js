@@ -19,6 +19,6 @@ describe('MemberInfo', () => {
       </StoreProvider>
     );
 
-    getByText('Test Name');
+    expect(getByText('Test Name')).toBeDefined();
   });
 });
