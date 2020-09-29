@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, cleanup, waitForElement } from '@testing-library/react';
+import { render, cleanup } from '@testing-library/react';
 import { HashRouter as Router, Route } from 'react-router-dom';
 import axiosMock from 'axios';
 import slotmachineResponse from '../data/slotmachine.json';
@@ -29,7 +29,7 @@ const renderSso = async () => {
     </StoreProvider>
   );
 
-  await waitForElement(() => getByTestId('sso-container'));
+  expect(getByTestId('sso-container')).toBeDefined();
 
   return { getByTestId, ...rest };
 };
@@ -42,6 +42,6 @@ describe('ID Card Viewer', () => {
   test('renders', async () => {
     const { getAllByText } = await renderSso();
 
-    await waitForElement(() => getAllByText('ID Card Viewer'));
+    expect(getAllByText('ID Card Viewer')).toBeDefined();
   });
 });
