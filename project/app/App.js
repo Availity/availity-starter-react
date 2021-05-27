@@ -4,33 +4,29 @@ import PageHeader from '@availity/page-header';
 import Spaces from '@availity/spaces';
 import BlockUi from 'react-block-ui';
 import { Footer, MemberInfo, SearchForm } from '@/components';
-import { useAppStore, useQueryParams } from '@/hooks';
+import { useAppContext } from '@/context';
+import { useQueryParams } from '@/hooks';
 
 const App = () => {
   const queryParams = useQueryParams();
-
-  const { clearMemberInfo, hasMemberInfo, loading } = useAppStore(store => ({
-    clearMemberInfo: () => store.setMemberInfo(),
-    hasMemberInfo: store.hasMemberInfo,
-    loading: store.loading,
-  }));
+  const { loading, hasMemberInfo, setHasMemberInfo } = useAppContext();
 
   return (
     <Container data-testid="sso-container" className="container-sm">
       <Spaces spaceIds={[queryParams.spaceId]} clientId="test">
         <PageHeader appName="ID Card Viewer" spaceId={queryParams.spaceId} />
         <BlockUi blocking={loading}>
-          {!hasMemberInfo ? (
-            <SearchForm />
-          ) : (
+          {hasMemberInfo ? (
             <>
               <MemberInfo />
               <div className="d-flex justify-content-end">
-                <Button className="mt-3" onClick={clearMemberInfo} color="primary">
+                <Button className="mt-3" onClick={() => setHasMemberInfo(false)} color="primary">
                   Go Back
                 </Button>
               </div>
             </>
+          ) : (
+            <SearchForm />
           )}
         </BlockUi>
       </Spaces>

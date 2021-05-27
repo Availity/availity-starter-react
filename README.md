@@ -10,65 +10,50 @@ Example Project running an ID Card Viewer App.
 
 ### Running
 
+Install the dependencies and run the app
+
 ```bash
-$ yarn
-$ yarn start
+yarn
+yarn start
 ```
 
-### Mobx
+### react-query
 
-This template makes use of `mobx` and `mobx-react-lite`. The implementation is modelled after [https://mobx-react.js.org/state-how].
+This template uses `React Context` and `react-query` to handle state and data fetching. You can find more information about `React Context` [here](https://reactjs.org/docs/hooks-reference.html#usecontext) and `react-query` [here](https://react-query.tanstack.com/)
 
-#### Adding another store
+#### Why this combo?
 
-- Add a file in `project/app/stores`
-  - This should export a function which creates the store. For more information on how `useLocalStore` works, [click here](https://mobx-react.js.org/state-local)
-- Add the store to the `StoreProvider` component.
-  - This can be done by either modifying the function `useLocalStore` takes in or by creating another local store to pass to the `value` prop.
-- Add a hook in `project/app/hooks` to observe the store
-  - The hook should take in a function which is a selector. This way we can only observe the data we need for that component, instead of the whole store.
+Most web apps, especially at Availity, require fetching data. `react-query` provides many tools to allow for a better developer and user experience. It has easy to use loading states, error handling, and caching. We use `Context` as the state manager. `Context` does have potential scaling performance concerns, but these can normally be minimized with good design, data flow, and use of `react-query` caching.
 
-#### FAQ
+#### Quick Guide on `react-query`
 
-**Question:** Why use `mobx-react-lite` instead of `mobx-react`?
+The main concept to focus on when using `react-query` and its cache are the use of `keys`.
 
-**Answer:** `mobx-react-lite` was built specifically for function components and hooks. If you need or plan on using Class Components then you will need to replace `mobx-react-lite` with `mobx-react`.
-
-**Q:** Do I need the `StoreProvider`?
-
-**A:** Yes. The intention of the `StoreProvider` is to be out of sight and out of mind. We have the provider to make mocking values easier in tests.
-
-**Q:** Where are the decorators (action, computed, etc.)?
-
-**A:** Forget about them. `useLocalStore` assigns them to the object created by the function passed to it.
+Every time this hook is called it will check if there is data available for the key `user`
 
 ```js
-const createStore = () => ({
-  id: '', // observable
-  loading: false, // observable
-  setId() {}, // action
-  async fetch(), // action
-  get isLoggedIn() {}, // computed
-});
+async function fetchUser() {
+  return AvUsersApi.me();
+}
+
+const query = useQuery('user', () => fetchUser());
 ```
 
-**Q:** How do I use `useAppStore`?
+> Note: this hook is available in `@availity/hooks`
 
-**A:** The hook `useAppStore` accepts one argument. This is a selector function which returns the data we want to observe. In the example below, we use the implicit return of arrow functions to return an object.
+`react-query` also exposes a `useMutation` hook. This helps with handling loading and error states more easily as there is no `useState` variable to toggle on off.
 
 ```js
-const { id, name, getSomething } = useAppStore(store => ({
-  id: store.id,
-  name: store.validResponse ? store.response.name : '',
-  getSomething: () => fetchSomething({ id }),
-}));
+async function updateUser(variables) {
+  return updateUser(variables);
+}
+
+const { mutate, isLoading, error } = useMutation(updateUser);
+
+<button onClick={() => mutate({ active: false })}>Disable User</button>;
 ```
 
-**Q:** What is the purpose of passing a selector function to `useAppStore` instead of returning the whole store?
-
-**A:** Passing a function to `useAppStore` allows our component to only observe specific properties from our store. This means if we have a larger store, but only want to observe one property, say `memberName`, the component will only be notified of changes to the `memberName`.
-
-> Note: If you want to observe the whole store or return it simply use `const appStore = useAppStore(store => store)`
+> Note: the `SearchForm` component has an example of a `useMutation` in action
 
 ### Dev Tools
 

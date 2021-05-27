@@ -1,10 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Card, CardBody, CardHeader, Row, Col, Button } from 'reactstrap';
+import { Card, CardBody, CardHeader, Col, Row } from 'reactstrap';
 import classNames from 'classnames';
 import { SpacesLogo } from '@availity/spaces';
-import { useAppStore } from '@/hooks';
-import FlipCard from './FlipCard';
+import { useQuery } from 'react-query';
+import { useAppContext } from '@/context';
+import MemberCard from './MemberCard';
 
 const Item = ({ name, value, children, className, ...rest }) => (
   <div className={classNames('d-flex justify-content-between', className)} {...rest}>
@@ -20,33 +21,38 @@ Item.propTypes = {
   className: PropTypes.string,
 };
 
+async function stall(stallTime = 3000) {
+  await new Promise((resolve) => setTimeout(resolve, stallTime));
+}
+
+async function fetchMember({ memberId, zipCode }) {
+  await stall();
+  return {
+    memberId,
+    zipCode,
+    name: 'John Doe',
+  };
+}
+
 const MemberInfo = () => {
-  const { isFlippable, memberInfo } = useAppStore(store => ({
-    isFlippable: store.isFlippable,
-    memberInfo: store.memberInfo || {},
-  }));
+  const { form } = useAppContext();
+  const { data: member } = useQuery(['member', form], fetchMember);
 
   return (
-    <FlipCard
-      front={({ toggle }) => (
+    <MemberCard
+      front={() => (
         <Card style={{ height: 293 }}>
           <CardHeader className="d-flex align-items-center justify-content-between">
             <SpacesLogo
               style={{ height: 40 }}
               fallback="https://www.cmsimaging.com/assets/img/brands/authpal/availity.png"
             />
-            {isFlippable ? (
-              <Button color="link" onClick={toggle}>
-                Go To Back
-              </Button>
-            ) : (
-              'Front'
-            )}
+            Front
           </CardHeader>
           <Row tag={CardBody} style={{ height: '100%' }}>
             <Col xs={5} className="border-bottom mb-2 pb-2">
-              <Item name="Name" value={memberInfo.name || 'N/A'} />
-              <Item name="Member Number" value={memberInfo.memberId || 'N/A'} />
+              <Item name="Name" value={member.name || 'N/A'} />
+              <Item name="Member Number" value={member.memberId || 'N/A'} />
             </Col>
             <Col xs={{ size: 6, offset: 1 }} className="border-bottom mb-2 pb-2">
               <Item name="Group NO" value="MEDIRIX" />
@@ -67,20 +73,14 @@ const MemberInfo = () => {
           </Row>
         </Card>
       )}
-      back={({ toggle }) => (
+      back={() => (
         <Card style={{ height: 293 }}>
           <CardHeader className="d-flex align-items-center justify-content-between">
             <SpacesLogo
               style={{ height: 40 }}
               fallback="https://www.cmsimaging.com/assets/img/brands/authpal/availity.png"
             />
-            {isFlippable ? (
-              <Button color="link" onClick={toggle}>
-                Go To Front
-              </Button>
-            ) : (
-              'Back'
-            )}
+            Back
           </CardHeader>
           <Row tag={CardBody} style={{ height: '100%' }}>
             <Col xs={8} className="mb-2 pb-2">
