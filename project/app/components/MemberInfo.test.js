@@ -1,22 +1,21 @@
 import React, { useEffect } from 'react';
 import { render } from '@testing-library/react';
-import { useMemberInfo } from '@/hooks';
-import { StoreProvider } from '@/stores';
+import { ContextProvider, useAppContext } from '@/context';
 
 const Component = () => {
-  const [info, setInfo] = useMemberInfo();
+  const { form, setForm } = useAppContext();
   useEffect(() => {
-    setInfo({ name: 'Test Name' });
-  }, [setInfo]);
-  return <div>{info ? info.name : 'none'}</div>;
+    setForm({ name: 'Test Name' });
+  }, [setForm]);
+  return <div>{form ? form.name : 'none'}</div>;
 };
 
 describe('MemberInfo', () => {
   test('renders', () => {
     const { getByText } = render(
-      <StoreProvider>
+      <ContextProvider>
         <Component />
-      </StoreProvider>
+      </ContextProvider>
     );
 
     expect(getByText('Test Name')).toBeDefined();
