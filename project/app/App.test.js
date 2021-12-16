@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, cleanup } from '@testing-library/react';
-import { HashRouter as Router, Route } from 'react-router-dom';
+import { HashRouter as Router, Route, Routes } from 'react-router-dom';
 import axiosMock from 'axios';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import slotmachineResponse from '../data/slotmachine.json';
@@ -26,9 +26,9 @@ const renderSso = async () => {
     <ContextProvider>
       <QueryClientProvider client={queryClient}>
         <Router>
-          <Route path="/">
-            <App />
-          </Route>
+          <Routes>
+            <Route path="/*" element={<App />} />
+          </Routes>
         </Router>
       </QueryClientProvider>
     </ContextProvider>
