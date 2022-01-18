@@ -48,7 +48,6 @@
     "browserslist": "4.19.1",
     "caniuse-lite": "1.0.30001286",
     "classnames": "^2.3.1",
-    "core-js": "3.19.3",
     "formik": "^2.2.8",
     "prop-types": "^15.8.1",
     "query-string": "5.1.1",
