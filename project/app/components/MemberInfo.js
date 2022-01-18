@@ -4,7 +4,9 @@ import { Card, CardBody, CardHeader, Col, Row } from 'reactstrap';
 import classNames from 'classnames';
 import { SpacesLogo } from '@availity/spaces';
 import { useQuery } from 'react-query';
+
 import { useAppContext } from '@/context';
+
 import MemberCard from './MemberCard';
 
 const Item = ({ name, value, children, className, ...rest }) => (

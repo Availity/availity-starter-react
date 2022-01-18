@@ -69,27 +69,3 @@ const Component = () => {
 ```
 
 > Note: the `SearchForm` component has an example of a `useMutation` in action
-
-### Dev Tools
-
-This template uses the following tools to aid in the development process.
-
-- [husky](https://github.com/typicode/husky#readme)
-- [commitlint](https://github.com/conventional-changelog/commitlint#readme)
-- [lint-staged](https://github.com/okonet/lint-staged#readme)
-
-### Committing Code to Git
-
-Use conventional commits messages following [Angular commit message style](https://github.com/angular/angular/blob/master/CONTRIBUTING.md). This project has pre-commit hook (using [husky](https://github.com/typicode/husky) and [lint-staged](https://github.com/okonet/lint-staged)) and that should enforce the Angular commit conventions.
-
-- **build**: Changes that affect the build system or external dependencies (example scopes: gulp, broccoli, npm)
-- **ci**: Changes to our CI configuration files and scripts (example scopes: Circle, BrowserStack, SauceLabs)
-- **docs**: Documentation only changes
-- **feat**: A new feature
-- **fix**: A bug fix
-- **perf**: A code change that improves performance
-- **refactor**: A code change that neither fixes a bug nor adds a feature
-- **style**: Changes that do not affect the meaning of the code (white-space, formatting, missing semi-colons, etc)
-- **test**: Adding missing tests or correcting existing tests
-
-Give detailed descriptions in your commit messages.
