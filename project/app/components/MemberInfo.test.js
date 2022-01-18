@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
+
 import { ContextProvider, useAppContext } from '@/context';
 
 const Component = () => {
@@ -12,12 +13,12 @@ const Component = () => {
 
 describe('MemberInfo', () => {
   test('renders', () => {
-    const { getByText } = render(
+    render(
       <ContextProvider>
         <Component />
       </ContextProvider>
     );
 
-    expect(getByText('Test Name')).toBeDefined();
+    screen.getByText('Test Name');
   });
 });

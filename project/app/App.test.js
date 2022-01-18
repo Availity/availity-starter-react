@@ -1,52 +1,41 @@
 import React from 'react';
-import { render, cleanup } from '@testing-library/react';
-import { HashRouter as Router, Route, Routes } from 'react-router-dom';
+import { render, screen, waitFor } from '@testing-library/react';
+import { MemoryRouter as Router, Route, Routes } from 'react-router-dom';
 import axiosMock from 'axios';
 import { QueryClient, QueryClientProvider } from 'react-query';
-import slotmachineResponse from '../data/slotmachine.json';
+
+import spaces from '../data/spaces.json';
 import App from './App';
 import { ContextProvider } from './context';
 
 jest.mock('axios');
 
-// delete global.window.location;
-global.window.location = { href: 'http://localhost/?spaceId=48C607A70B5A46A3864A34E2BDDDEA04' };
-
 const queryClient = new QueryClient();
-
-const renderSso = async () => {
-  axiosMock.mockResolvedValue({
-    config: { polling: false },
-    data: slotmachineResponse,
-    status: 202,
-    statusText: 'Ok',
-  });
-
-  const { getByTestId, ...rest } = render(
-    <ContextProvider>
-      <QueryClientProvider client={queryClient}>
-        <Router>
-          <Routes>
-            <Route path="/*" element={<App />} />
-          </Routes>
-        </Router>
-      </QueryClientProvider>
-    </ContextProvider>
-  );
-
-  expect(getByTestId('sso-container')).toBeDefined();
-
-  return { getByTestId, ...rest };
-};
-
-afterEach(() => {
-  cleanup();
-});
 
 describe('ID Card Viewer', () => {
   test('renders', async () => {
-    const { getAllByText } = await renderSso();
+    axiosMock.mockResolvedValue({
+      config: { polling: false },
+      data: spaces,
+      status: 202,
+      statusText: 'Ok',
+    });
 
-    expect(getAllByText('ID Card Viewer')).toBeDefined();
+    render(
+      <ContextProvider>
+        <QueryClientProvider client={queryClient}>
+          <Router initialEntries={['/?spaceId=12345']}>
+            <Routes>
+              <Route path="/*" element={<App />} />
+            </Routes>
+          </Router>
+        </QueryClientProvider>
+      </ContextProvider>
+    );
+
+    await waitFor(() => {
+      screen.getByTestId('sso-container');
+      screen.getAllByText('ID Card Viewer');
+    });
   });
 });

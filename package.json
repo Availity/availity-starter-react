@@ -1,98 +1,81 @@
 {
   "name": "availity-starter-react",
+  "version": "0.1.0",
   "private": true,
-  "version": "5.3.4",
   "description": "React project using @availity/workflow",
-  "main": "index.js",
-  "scripts": {
-    "start": "av start",
-    "av": "av",
-    "test": "av test",
-    "test:watch": "av test --watch",
-    "test:integration": "av test",
-    "about": "av about",
-    "lint": "av lint",
-    "help": "av help",
-    "upgrade:workflow": "./node_modules/.bin/upgrade-workflow",
-    "profile": "av profile",
-    "profile:production": "cross-env NODE_ENV=production av profile",
-    "build": "av build",
-    "build:production": "cross-env NODE_ENV=production av build",
-    "build:staging": "cross-env NODE_ENV=staging av build",
-    "release": "av release",
-    "prettier": "prettier --write '**/*.{ts,tsx,js,scss}'",
-    "production": "cross-env NODE_ENV=production av release",
-    "staging": "cross-env NODE_ENV=staging av release"
-  },
   "keywords": [
     "react",
     "availity",
     "workflow"
   ],
-  "license": "MIT",
   "homepage": "https://github.com/availity/availity-workflow#readme",
+  "license": "MIT",
+  "main": "project/app/index.js",
+  "scripts": {
+    "av": "av",
+    "about": "av about",
+    "build": "av build",
+    "build:production": "cross-env NODE_ENV=production av build",
+    "build:staging": "cross-env NODE_ENV=staging av build",
+    "help": "av help",
+    "lint": "av lint",
+    "format": "prettier --write '**/*.{ts,tsx,js,scss}'",
+    "format:check": "prettier --check '**/*.{ts,tsx,js,scss}'",
+    "production": "cross-env NODE_ENV=production av release",
+    "profile": "av profile",
+    "profile:production": "cross-env NODE_ENV=production av profile",
+    "release": "av release",
+    "staging": "cross-env NODE_ENV=staging av release",
+    "start": "av start",
+    "test": "av test",
+    "test:integration": "av test",
+    "test:watch": "av test --watch",
+    "upgrade:workflow": "./node_modules/.bin/upgrade-workflow"
+  },
+  "resolutions": {
+    "core-js": "3.19.3"
+  },
   "dependencies": {
-    "@availity/api-axios": "^6.0.5",
-    "@availity/form": "^1.2.2",
-    "@availity/icon": "^0.10.1",
-    "@availity/link": "^2.4.1",
-    "@availity/page-header": "^11.1.10",
-    "@availity/spaces": "^5.1.1",
-    "@availity/yup": "^4.1.0",
+    "@availity/api-axios": "^6.0.6",
+    "@availity/form": "^1.2.3",
+    "@availity/icon": "^0.10.2",
+    "@availity/link": "^2.4.2",
+    "@availity/page-header": "^11.1.13",
+    "@availity/spaces": "^5.1.2",
+    "@availity/yup": "^4.2.0",
     "availity-uikit": "^4.1.5",
-    "axios": "^0.24.0",
+    "axios": "^0.25.0",
     "browserslist": "4.19.1",
     "caniuse-lite": "1.0.30001286",
     "classnames": "^2.3.1",
     "formik": "^2.2.8",
-    "prop-types": "^15.7.2",
+    "prop-types": "^15.8.1",
     "query-string": "5.1.1",
     "react": "^17.0.2",
     "react-block-ui": "^1.3.2",
     "react-dom": "^17.0.2",
-    "react-query": "^3.34.4",
-    "react-router-dom": "^6.1.1",
+    "react-query": "^3.34.8",
+    "react-router-dom": "^6.2.1",
     "reactstrap": "^8.10.0",
     "yup": "^0.32.11"
   },
   "devDependencies": {
-    "@availity/mock-server": "^7.1.3",
-    "@availity/workflow": "^9.0.4",
-    "@commitlint/cli": "^12.1.4",
-    "@commitlint/config-conventional": "^12.1.4",
+    "@availity/mock-server": "^7.1.4",
+    "@availity/workflow": "^9.0.7",
     "@testing-library/react": "^12.1.2",
-    "@typescript-eslint/eslint-plugin": "^5.7.0",
-    "@typescript-eslint/parser": "^5.7.0",
+    "@types/jest": "^26.0.15",
+    "@types/node": "^14.0.0",
+    "@typescript-eslint/eslint-plugin": "^4.33.0",
+    "@typescript-eslint/parser": "^4.33.0",
     "cross-env": "^7.0.2",
     "eslint-config-availity": "^8.0.6",
-    "husky": "^4.3.0",
-    "lint-staged": "^10.4.0",
     "prettier": "^2.1.2",
     "typescript": "^4.5.4"
-  },
-  "availityWorkflow": true,
-  "commitlint": {
-    "extends": [
-      "@commitlint/config-conventional"
-    ]
-  },
-  "lint-staged": {
-    "project/**/*.(js|ts|jsx|tsx)": [
-      "eslint --fix",
-      "prettier --write",
-      "yarn test"
-    ]
-  },
-  "husky": {
-    "hooks": {
-      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
-      "pre-commit": "lint-staged",
-      "pre-push": "yarn lint && yarn test"
-    }
   },
   "prettier": {
     "printWidth": 120,
     "singleQuote": true,
     "trailingComma": "es5"
-  }
+  },
+  "availityWorkflow": true
 }
