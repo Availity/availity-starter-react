@@ -38,6 +38,7 @@
   "dependencies": {
     "@availity/api-axios": "^8.0.2",
     "@availity/block-ui": "^1.1.0",
+    "@availity/favorites": "^3.4.3",
     "@availity/form": "^1.2.3",
     "@availity/icon": "^0.11.3",
     "@availity/link": "^2.4.2",
