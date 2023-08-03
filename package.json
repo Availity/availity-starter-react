@@ -36,17 +36,17 @@
     "core-js": "3.19.3"
   },
   "dependencies": {
-    "@availity/api-axios": "^6.0.6",
+    "@availity/api-axios": "^8.0.2",
     "@availity/form": "^1.2.3",
-    "@availity/icon": "^0.10.2",
+    "@availity/icon": "^0.11.3",
     "@availity/link": "^2.4.2",
     "@availity/page-header": "^11.1.13",
-    "@availity/spaces": "^5.1.2",
-    "@availity/yup": "^4.2.0",
+    "@availity/spaces": "^6.6.0",
+    "@availity/yup": "^5.1.2",
     "availity-uikit": "^4.1.5",
-    "axios": "^0.25.0",
-    "browserslist": "4.19.1",
-    "caniuse-lite": "1.0.30001286",
+    "axios": "^1.4.0",
+    "browserslist": "4.21.10",
+    "caniuse-lite": "1.0.30001519",
     "classnames": "^2.3.1",
     "formik": "^2.2.8",
     "prop-types": "^15.8.1",
@@ -57,20 +57,20 @@
     "react-query": "^3.34.8",
     "react-router-dom": "^6.2.1",
     "reactstrap": "^8.10.0",
-    "yup": "^0.32.11"
+    "yup": "^1.2.0"
   },
   "devDependencies": {
     "@availity/mock-server": "^7.1.4",
     "@availity/workflow": "^9.5.3-alpha.6",
-    "@testing-library/react": "^12.1.2",
-    "@types/jest": "^26.0.15",
-    "@types/node": "^14.0.0",
-    "@typescript-eslint/eslint-plugin": "^4.33.0",
-    "@typescript-eslint/parser": "^4.33.0",
+    "@testing-library/react": "^14.0.0",
+    "@types/jest": "^29.5.3",
+    "@types/node": "^20.4.6",
+    "@typescript-eslint/eslint-plugin": "^6.2.1",
+    "@typescript-eslint/parser": "^6.2.1",
     "cross-env": "^7.0.2",
     "eslint-config-availity": "^8.0.9",
-    "prettier": "^2.1.2",
-    "typescript": "^4.5.5"
+    "prettier": "^3.0.1",
+    "typescript": "^5.1.6"
   },
   "prettier": {
     "printWidth": 120,
