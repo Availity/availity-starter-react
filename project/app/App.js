@@ -4,9 +4,9 @@ import PageHeader from '@availity/page-header';
 import Spaces from '@availity/spaces';
 import BlockUi from '@availity/block-ui';
 
-import { Footer, MemberInfo, SearchForm } from './components';
-import { useAppContext } from './context';
-import { useQueryParams } from './hooks';
+import { Footer, MemberInfo, SearchForm } from '@/components';
+import { useAppContext } from '@/context';
+import { useQueryParams } from '@/hooks';
 
 const App = () => {
   const queryParams = useQueryParams();

@@ -5,7 +5,7 @@ import { useMutation, useQueryClient } from 'react-query';
 import * as yup from 'yup';
 import BlockUi from '@availity/block-ui';
 
-import { useAppContext } from '../context';
+import { useAppContext } from '@/context';
 
 const schema = yup.object().shape({
   memberId: yup

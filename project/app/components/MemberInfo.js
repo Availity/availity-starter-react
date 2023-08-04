@@ -5,7 +5,7 @@ import classNames from 'classnames';
 import { SpacesLogo } from '@availity/spaces';
 import { useQuery } from 'react-query';
 
-import { useAppContext } from '../context';
+import { useAppContext } from '@/context';
 
 import MemberCard from './MemberCard';
 
