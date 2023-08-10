@@ -61,11 +61,11 @@
     "yup": "^1.2.0"
   },
   "devDependencies": {
-    "@availity/mock-server": "^7.1.4",
-    "@availity/workflow": "^9.5.3-alpha.11",
+    "@availity/mock-server": "^8.0.0",
+    "@availity/workflow": "^10.0.0",
     "@testing-library/react": "^14.0.0",
     "@types/jest": "^29.5.3",
-    "@types/node": "^20.4.6",
+    "@types/node": "^20.4.9",
     "cross-env": "^7.0.2",
     "eslint-config-availity": "^8.0.9",
     "prettier": "^3.0.1",
