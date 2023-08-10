@@ -1,10 +1,8 @@
 import React from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
 import { MemoryRouter as Router, Route, Routes } from 'react-router-dom';
-import axiosMock from 'axios';
 import { QueryClient, QueryClientProvider } from 'react-query';
 
-import spaces from '../data/spaces.json';
 import App from './App';
 import { ContextProvider } from './context';
 
@@ -14,12 +12,6 @@ const queryClient = new QueryClient();
 
 describe('ID Card Viewer', () => {
   test('renders', async () => {
-    axiosMock.mockResolvedValue({
-      config: { polling: false },
-      data: spaces,
-      status: 202,
-      statusText: 'Ok',
-    });
 
     render(
       <ContextProvider>

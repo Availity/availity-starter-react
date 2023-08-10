@@ -1,16 +1,18 @@
 import React from 'react';
-import { render } from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import { HashRouter as Router, Route, Routes } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from 'react-query';
 
 import App from './App';
 import { ContextProvider } from './context';
 import './index.scss';
-import 'react-block-ui/style.css';
 
 const queryClient = new QueryClient();
 
-render(
+const container = document.getElementById('root');
+const root = createRoot(container);
+
+root.render(
   <ContextProvider>
     <QueryClientProvider client={queryClient}>
       <Router>
@@ -19,6 +21,5 @@ render(
         </Routes>
       </Router>
     </QueryClientProvider>
-  </ContextProvider>,
-  document.querySelector('#root')
+  </ContextProvider>
 );

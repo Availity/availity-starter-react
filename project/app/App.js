@@ -2,7 +2,7 @@ import React from 'react';
 import { Container, Button } from 'reactstrap';
 import PageHeader from '@availity/page-header';
 import Spaces from '@availity/spaces';
-import BlockUi from 'react-block-ui';
+import BlockUi from '@availity/block-ui';
 
 import { Footer, MemberInfo, SearchForm } from '@/components';
 import { useAppContext } from '@/context';
