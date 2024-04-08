@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Card, CardBody, CardHeader, Col, Row } from 'reactstrap';
 import classNames from 'classnames';
 import { SpacesLogo } from '@availity/spaces';
-import { useQuery } from 'react-query';
+import { useQuery } from '@tanstack/react-query';
 
 import { useAppContext } from '@/context';
 
