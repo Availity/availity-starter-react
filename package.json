@@ -42,6 +42,7 @@
     "@availity/page-header": "^13.0.5",
     "@availity/spaces": "^8.0.3",
     "@availity/yup": "^5.1.5",
+    "@tanstack/react-query": "^4.36.1",
     "availity-uikit": "^4.6.3",
     "axios": "^1.6.8",
     "browserslist": "4.23.0",
@@ -52,7 +53,6 @@
     "query-string": "^7.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-query": "^3.34.8",
     "react-router-dom": "^6.22.3",
     "reactstrap": "^8.10.0",
     "yup": "^1.2.0"

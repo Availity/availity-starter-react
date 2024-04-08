@@ -1,7 +1,7 @@
 import React from 'react';
 import { Form, Field } from '@availity/form';
 import { Alert, Button, Card } from 'reactstrap';
-import { useMutation, useQueryClient } from 'react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import * as yup from 'yup';
 import BlockUi from '@availity/block-ui';
 
