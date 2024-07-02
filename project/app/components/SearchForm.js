@@ -10,16 +10,16 @@ import { useAppContext } from '@/context';
 const schema = yup.object().shape({
   memberId: yup
     .string()
-    .isRequired(true, 'This Field is Required.')
+    .required('This Field is Required.')
     .matches(/^\d{8}$/, 'Member ID must be 8 digits.'),
   zipCode: yup
     .string()
-    .isRequired(true, 'This Field is Required.')
+    .required('This Field is Required.')
     .matches(/^\d{5}(?:-\d{4})?$/, 'Valid Zip Code Formats: 12345 or 12345-6789'),
 });
 
 async function stall(stallTime = 3000) {
-  await new Promise((resolve) => setTimeout(resolve, stallTime));
+  await new Promise((resolve) => { setTimeout(resolve, stallTime) });
 }
 
 async function fetchMember({ memberId, zipCode }) {
