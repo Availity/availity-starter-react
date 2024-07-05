@@ -59,14 +59,14 @@
   },
   "devDependencies": {
     "@availity/mock-server": "^9.0.0",
-    "@availity/workflow": "^11.1.0",
+    "@availity/workflow": "^12.0.1",
     "@testing-library/react": "^14.2.2",
     "@types/jest": "^29.5.12",
     "@types/node": "^20.12.4",
     "cross-env": "^7.0.2",
-    "eslint-config-availity": "^9.0.1",
+    "eslint-config-availity": "^10.0.2",
     "prettier": "^3.2.5",
-    "typescript": "^5.4.4"
+    "typescript": "^5.2.2"
   },
   "prettier": {
     "printWidth": 120,

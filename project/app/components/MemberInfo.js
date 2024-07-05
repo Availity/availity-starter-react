@@ -1,3 +1,4 @@
+/* eslint react/no-unstable-nested-components: "off" */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Card, CardBody, CardHeader, Col, Row } from 'reactstrap';
@@ -24,7 +25,7 @@ Item.propTypes = {
 };
 
 async function stall(stallTime = 3000) {
-  await new Promise((resolve) => setTimeout(resolve, stallTime));
+  await new Promise((resolve) => { setTimeout(resolve, stallTime) });
 }
 
 async function fetchMember({ memberId, zipCode }) {

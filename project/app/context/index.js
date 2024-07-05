@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useMemo, useState } from 'react';
 import PropTypes from 'prop-types';
 
 export const context = createContext(null);
@@ -14,8 +14,12 @@ export const ContextProvider = ({ children }) => {
   const [hasMemberInfo, setHasMemberInfo] = useState(false);
   const [form, setForm] = useState({ memberId: '', zipCode: '' });
 
+  const globalContext = useMemo(() => ({
+    form, setForm, loading, setLoading, hasMemberInfo, setHasMemberInfo,
+  }), [form, loading, hasMemberInfo])
+
   return (
-    <context.Provider value={{ form, setForm, loading, setLoading, hasMemberInfo, setHasMemberInfo }}>
+    <context.Provider value={globalContext}>
       {children}
     </context.Provider>
   );
