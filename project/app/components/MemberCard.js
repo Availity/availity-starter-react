@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
 
 const MemberCard = ({ front: Front, back: Back }) => (
   <div>
@@ -9,7 +8,7 @@ const MemberCard = ({ front: Front, back: Back }) => (
         <div className="flip-card-front">
           <Front />
         </div>
-        <div className={classNames('flip-card-back', 'mt-3')}>
+        <div  className='flip-card-back' style={{marginTop: 16}}>
           <Back />
         </div>
       </div>

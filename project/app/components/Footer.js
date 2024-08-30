@@ -1,19 +1,18 @@
 import React from 'react';
-import Icon from '@availity/icon';
-import AvLink from '@availity/link';
+import { HeartIcon, Link, Typography } from '@availity/element';
 
 const currentYear = new Date().getFullYear() 
 
 const Footer = () => (
-  <p className="text-center mt-3">
+  <Typography margin={2} textAlign='center'>
     Made with
-    <Icon name="heart" className="mx-1" color="danger" />
+    <HeartIcon name="heart" color="error" sx={{marginLeft: 1, marginRight: 1}} />
     by
-    <AvLink href="https://www.availity.com" target="_blank" className="mx-1">
+    <Link href="https://www.availity.com" target="_blank" marginLeft={1} marginRight={1}>
       Availity
-    </AvLink>
+    </Link>
     {currentYear}
-  </p>
+  </Typography>
 );
 
 export default Footer;
