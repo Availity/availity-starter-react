@@ -1,22 +1,9 @@
 import React from 'react';
-import { Form, Field } from '@availity/form';
-import { Alert, Button, Card } from 'reactstrap';
+import { Alert, BlockUi, Button, Card, Grid, TextField, Collapse } from '@availity/element';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import * as yup from 'yup';
-import BlockUi from '@availity/block-ui';
+import { useForm } from 'react-hook-form';
 
 import { useAppContext } from '@/context';
-
-const schema = yup.object().shape({
-  memberId: yup
-    .string()
-    .required('This Field is Required.')
-    .matches(/^\d{8}$/, 'Member ID must be 8 digits.'),
-  zipCode: yup
-    .string()
-    .required('This Field is Required.')
-    .matches(/^\d{5}(?:-\d{4})?$/, 'Valid Zip Code Formats: 12345 or 12345-6789'),
-});
 
 async function stall(stallTime = 3000) {
   await new Promise((resolve) => { setTimeout(resolve, stallTime) });
@@ -43,10 +30,16 @@ function useFetchMember() {
 }
 
 const SearchForm = () => {
-  const { mutate: getMember, isLoading, error } = useFetchMember();
+  const { mutate: getMember, isLoading } = useFetchMember();
   const { setHasMemberInfo, form, setForm } = useAppContext();
 
-  const handleSubmit = async (values) => {
+  const {
+    formState: { errors },
+    handleSubmit,
+    register,
+  } = useForm({defaultValues: form});
+
+  const onSubmit = async (values) => {
     getMember(values, {
       onSuccess: () => {
         setForm(values);
@@ -56,18 +49,22 @@ const SearchForm = () => {
   };
 
   return (
-    <Card body>
+    <Card sx={{padding: '1rem'}}>
       <BlockUi blocking={isLoading}>
-        <Alert color="danger" isOpen={!!error}>
-          {error?.message || 'An error occurred'}
-        </Alert>
-        <Form initialValues={form} validationSchema={schema} onSubmit={handleSubmit}>
-          <Field name="memberId" type="text" label="Member ID" />
-          <Field name="zipCode" type="text" label="Zip Code" />
-          <Button type="submit" color="primary" className="float-right">
-            View Member Card
-          </Button>
-        </Form>
+        <Collapse in={!!errors.memberId || !!errors.zipCode}>
+          <Alert severity="error" sx={{marginBottom: '1rem'}}>
+            An error occurred
+          </Alert>
+        </Collapse>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <TextField name="memberId" type="text" label="Member ID" error={!!errors.memberId} helperText={errors.memberId?.message} {...register('memberId', {required: 'This field is required.', pattern: {value: /^\d{8}$/, message: 'Member ID must be 8 digits.'}})} />
+          <TextField name="zipCode" type="text" label="Zip Code" error={!!errors.zipCode} helperText={errors.zipCode?.message} {...register('zipCode', {required: 'This field is required.', pattern:{value: /^\d{5}(?:-\d{4})?$/, message: 'Valid Zip Code Formats: 12345 or 12345-6789'}})} />
+          <Grid container justifyContent="end">
+            <Button type="submit" color="primary">
+              View Member Card
+            </Button>
+          </Grid>
+        </form>
       </BlockUi>
     </Card>
   );
