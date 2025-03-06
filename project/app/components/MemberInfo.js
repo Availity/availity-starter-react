@@ -46,23 +46,23 @@ const MemberInfo = () => {
           <CardHeader title="Front" />
           <CardContent>
             <Grid container  style={{ height: '100%' }} justifyContent='space-between'>
-              <Grid direction="column" xs={5}>
+              <Grid direction="column" size={{xs: 5}}>
                 <Item name="Name" value={member.name || 'N/A'} />
                 <Item name="Member Number" value={member.memberId || 'N/A'} />
                 <Divider sx={{marginTop: '24px'}} />
               </Grid>
-              <Grid direction="column" xs={6}>
+              <Grid direction="column" size={{xs: 6}}>
                 <Item name="Group NO" value="MEDIRIX" />
                 <Item name="Plan Code" value="455" />
                 <Item name="CMS" value="H125353" />
                 <Divider />
               </Grid>
-              <Grid direction="column" xs={5}>
+              <Grid direction="column" size={{xs: 5}}>
                 <Item name="FHCP NPI" value="3351244245" />
                 <Item name="Effective" value="14 May 2019" />
                 <Item name="D.O.B" value="21 Dec 1960" />
               </Grid>
-              <Grid direction="column" xs={6}>
+              <Grid direction="column" size={{xs: 6}}>
                 <Item name="RX Group" value="FHTP GS" />
                 <Item name="RX ID" value="455" />
                 <Item name="Rx BIN" value="31" />
@@ -77,7 +77,7 @@ const MemberInfo = () => {
           <CardHeader title="Back"  />
           <CardContent>
             <Grid container style={{ height: '100%' }} justifyContent="space-between">
-              <Grid direction="column" xs={7} className="mb-2 pb-2">
+              <Grid direction="column" size={{xs: 7}} className="mb-2 pb-2">
                 <Item name="Members">
                   <span className="pl-3">
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
@@ -85,7 +85,7 @@ const MemberInfo = () => {
                   </span>
                 </Item>
               </Grid>
-              <Grid direction="column" xs={4} className="mb-2 pb-2">
+              <Grid direction="column" size={{xs: 4}} className="mb-2 pb-2">
                 <Item name="Group NO" value="MEDIRIX" />
                 <Item name="Plan Code" value="455" />
                 <Item name="CMS" value="H125353" />
