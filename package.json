@@ -33,8 +33,8 @@
     "upgrade:workflow": "./node_modules/.bin/upgrade-workflow"
   },
   "dependencies": {
-    "@availity/api-axios": "^9.0.6",
-    "@availity/element": "^0.49.4",
+    "@availity/api-axios": "^10.0.0",
+    "@availity/element": "^1.0.5",
     "@tanstack/react-query": "^4.36.1",
     "axios": "^1.7.8",
     "browserslist": "4.23.3",
