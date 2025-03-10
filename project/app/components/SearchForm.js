@@ -49,8 +49,8 @@ const SearchForm = () => {
   };
 
   return (
-    <Card sx={{padding: '1rem'}}>
-      <BlockUi blocking={isLoading}>
+    <BlockUi blocking={isLoading}>
+      <Card sx={{padding: '1rem'}}>
         <Collapse in={!!errors.memberId || !!errors.zipCode}>
           <Alert severity="error" sx={{marginBottom: '1rem'}}>
             An error occurred
@@ -65,8 +65,8 @@ const SearchForm = () => {
             </Button>
           </Grid>
         </form>
-      </BlockUi>
-    </Card>
+      </Card>
+    </BlockUi>
   );
 };
 
