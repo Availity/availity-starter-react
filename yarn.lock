@@ -881,9 +881,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@availity/workflow@npm:^12.1.1":
-  version: 12.1.1
-  resolution: "@availity/workflow@npm:12.1.1"
+"@availity/workflow@npm:^12.2.0":
+  version: 12.2.0
+  resolution: "@availity/workflow@npm:12.2.0"
   dependencies:
     "@availity/mock-server": "npm:9.1.0"
     "@availity/workflow-logger": "npm:7.1.0"
@@ -966,7 +966,7 @@ __metadata:
   bin:
     av: ./index.js
     workflow: ./index.js
-  checksum: 10c0/6311df093fcf8306dfed2285fcab41f7cc30f2f7d86c3aedffac00ed0cb8c579bf00a621f8754d5ee1f099865e9896dfd8d92cbe8cf2df08a24dc78c30e45e1d
+  checksum: 10c0/4cf0970dc9dd9da0e80ef22f726177586d1b35ae3912b90a896ae176a7834c849acf164e3359bfca8b2cc360cd3ac40d37f4b5eb91952f2a6690cd3c8d29d5a4
   languageName: node
   linkType: hard
 
@@ -5914,7 +5914,7 @@ __metadata:
     "@availity/api-axios": "npm:^10.0.3"
     "@availity/element": "npm:^1.0.37"
     "@availity/mock-server": "npm:^9.1.0"
-    "@availity/workflow": "npm:^12.1.1"
+    "@availity/workflow": "npm:^12.2.0"
     "@tanstack/react-query": "npm:^4.36.1"
     "@testing-library/react": "npm:^14.3.1"
     "@types/jest": "npm:^29.5.14"
