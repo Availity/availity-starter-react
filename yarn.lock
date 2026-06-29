@@ -941,9 +941,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@availity/workflow@npm:^14.0.0":
-  version: 14.0.0
-  resolution: "@availity/workflow@npm:14.0.0"
+"@availity/workflow@npm:^14.0.1":
+  version: 14.0.1
+  resolution: "@availity/workflow@npm:14.0.1"
   dependencies:
     "@availity/mock-server": "npm:11.0.0"
     "@availity/workflow-logger": "npm:9.0.0"
@@ -973,7 +973,7 @@ __metadata:
     open: "npm:^11.0.0"
     ora: "npm:^9.4.1"
     path-browserify: "npm:^1.0.1"
-    postcss: "npm:^8.5.15"
+    postcss: "npm:^8.5.16"
     postcss-flexbugs-fixes: "npm:^5.0.2"
     postcss-focus: "npm:^7.0.0"
     postcss-loader: "npm:^8.2.1"
@@ -995,13 +995,13 @@ __metadata:
     webpack-notifier: "npm:^1.15.0"
     yargs: "npm:^18.0.0"
   peerDependencies:
-    eslint-config-availity: "*"
+    eslint-config-availity: ^14.0.0 || ^15.0.0
     react: ^18.0.0 || ^19.0.0
     react-dom: ^18.0.0 || ^19.0.0
   bin:
     av: ./index.js
     workflow: ./index.js
-  checksum: 10c0/825adf76b0ff1b22146b6b8723c836f253848a5213644d4ed2ede567bab2c905de46473d6097ae708746e197742f2cb41fcebbd58a548812da2f726c855295c4
+  checksum: 10c0/12056ffaf7fae76f437a4dce721676fdf7d54f8bacd310f7964da153540be2059c1e0d5538099a413e5d89e80e3cc8ba3471d4b995401f0ee75468fdeb2f8527
   languageName: node
   linkType: hard
 
@@ -5689,7 +5689,7 @@ __metadata:
     "@availity/api-axios": "npm:^13.2.0"
     "@availity/element": "npm:^3.0.1"
     "@availity/mock-server": "npm:^11.0.0"
-    "@availity/workflow": "npm:^14.0.0"
+    "@availity/workflow": "npm:^14.0.1"
     "@tanstack/react-query": "npm:^5.101.2"
     "@testing-library/react": "npm:^16.3.2"
     "@types/node": "npm:^22.20.0"
@@ -12458,7 +12458,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"postcss@npm:^8.4.40, postcss@npm:^8.5.15":
+"postcss@npm:^8.4.40, postcss@npm:^8.5.15, postcss@npm:^8.5.16":
   version: 8.5.16
   resolution: "postcss@npm:8.5.16"
   dependencies:
