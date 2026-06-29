@@ -1,47 +1,80 @@
 # Availity Starter React
 
-> Simple Template Project For React Web Apps on the Availity Portal
+> Template project for React web apps on the Availity Portal using [@availity/workflow](https://github.com/Availity/availity-workflow)
 
-## Resources
+## Requirements
 
-The following are links to documentation for building an app at Availity
+- Node.js 22+
+- Yarn 4+
 
-- [Availity GitHub Repositories](https://github.com/Availity)
-- [Availity Workflow Tutorial](https://availity.github.io/availity-workflow/)
-- [Availity Component Docs](https://availity.github.io/availity-react/)
-- [Availity JavaScript SDK Docs](https://availity.github.io/sdk-js/)
-
-## Usage
-
-### Running the App
-
-Install the dependencies and run the app
+## Getting Started
 
 ```bash
 yarn
 yarn start
 ```
 
-### Data Fetching
+## Scripts
 
-This template uses `React Context` and `react-query` to handle state and data fetching. You can find more information about `React Context` [here](https://reactjs.org/docs/hooks-reference.html#usecontext) and `react-query` [here](https://react-query.tanstack.com/)
+| Script | Description |
+| --- | --- |
+| `yarn start` | Start the development server |
+| `yarn build` | Build for development |
+| `yarn build:production` | Build for production |
+| `yarn test` | Run tests (Vitest) |
+| `yarn test:watch` | Run tests in watch mode |
+| `yarn test:coverage` | Run tests with coverage |
+| `yarn lint` | Lint source files (ESLint) |
+| `yarn format` | Format files (Prettier) |
 
-#### Why this combo?
+## Project Structure
 
-Most web apps, especially at Availity, require fetching data. `react-query` provides many tools to allow for a better developer and user experience. It has easy to use loading states, error handling, and caching. We use `Context` as the state manager. `Context` does have potential scaling performance concerns, but these can normally be minimized with good design, data flow, and use of `react-query` caching.
+```
+project/
+├── app/
+│   ├── index.jsx          # App entry point
+│   ├── App.jsx            # Root component with routing
+│   ├── components/        # Shared components
+│   ├── context/           # React Context providers
+│   └── hooks/             # Custom hooks
+└── config/
+    └── workflow.js        # Workflow configuration
+```
 
-#### Quick Guide on `react-query`
+## Configuration
 
-The main concept to focus on when using `react-query` and its cache are the use of `keys`.
+| File | Purpose |
+| --- | --- |
+| `project/config/workflow.js` | Dev server, webpack, and build configuration |
+| `eslint.config.js` | ESLint flat config |
+| `tsconfig.json` | TypeScript configuration (type-checking only) |
 
-Every time this hook is called it will check if there is data available for the key `user`
+This project uses ESM (`"type": "module"` in package.json). All config files use `import`/`export` syntax.
 
-```js
-async function fetchUser() {
-  return AvUsersApi.me();
-}
+## Tech Stack
 
-const useCurrentUser = () => useQuery('user', () => fetchUser());
+- **Build/Dev**: [@availity/workflow](https://github.com/Availity/availity-workflow) (webpack + esbuild)
+- **Components**: [@availity/element](https://availity.github.io/element/) (MUI-based design system)
+- **Data Fetching**: [@tanstack/react-query](https://tanstack.com/query)
+- **Routing**: [react-router-dom](https://reactrouter.com/)
+- **Testing**: [Vitest](https://vitest.dev/) + [@testing-library/react](https://testing-library.com/docs/react-testing-library/intro/)
+- **Linting**: [eslint-config-availity](https://github.com/Availity/eslint-config-availity) (flat config)
+
+## Data Fetching
+
+This template uses React Context for state and `@tanstack/react-query` for server state and data fetching.
+
+### react-query Example
+
+```jsx
+import { useQuery } from '@tanstack/react-query';
+import AvUsersApi from '@availity/api-axios';
+
+const useCurrentUser = () =>
+  useQuery({
+    queryKey: ['user'],
+    queryFn: () => AvUsersApi.me(),
+  });
 
 const Component = () => {
   const { data: user, isLoading } = useCurrentUser();
@@ -52,20 +85,27 @@ const Component = () => {
 };
 ```
 
-> Note: the `useCurrentUser` hook is available in [@availity/hooks](https://github.com/Availity/availity-react/tree/master/packages/hooks)
+> The `useCurrentUser` hook is available in [@availity/hooks](https://github.com/Availity/availity-react/tree/master/packages/hooks)
 
-`react-query` also exposes a `useMutation` hook. This helps with handling loading and error states more easily as there is no `useState` variable to toggle on off.
+### Mutations
 
-```js
-async function updateUser(variables) {
-  return updateUserInfo(variables);
-}
+```jsx
+import { useMutation } from '@tanstack/react-query';
 
 const Component = () => {
-  const { mutate, isLoading, error } = useMutation(updateUser);
+  const { mutate, isPending, error } = useMutation({
+    mutationFn: (variables) => updateUserInfo(variables),
+  });
 
   return <button onClick={() => mutate({ active: false })}>Disable User</button>;
 };
 ```
 
-> Note: the `SearchForm` component has an example of a `useMutation` in action
+## Resources
+
+- [Availity Docs Hub](https://availity.github.io/)
+- [Availity Workflow Docs](https://availity.github.io/availity-workflow/)
+- [Availity Element (Component Library)](https://availity.github.io/element/)
+- [Availity React Packages](https://availity.github.io/availity-react/)
+- [Availity JavaScript SDK](https://availity.github.io/sdk-js/)
+- [TanStack Query Docs](https://tanstack.com/query)
