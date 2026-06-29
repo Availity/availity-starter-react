@@ -6,7 +6,6 @@ import { ThemeProvider } from '@availity/element';
 
 import App from './App';
 import { ContextProvider } from './context';
-import './index.scss';
 
 const queryClient = new QueryClient();
 

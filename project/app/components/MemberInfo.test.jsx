@@ -19,6 +19,6 @@ describe('MemberInfo', () => {
       </ContextProvider>
     );
 
-    screen.getByText('Test Name');
+    expect(screen.getByText('Test Name')).toBeDefined();
   });
 });

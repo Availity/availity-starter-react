@@ -8,7 +8,7 @@ const MemberCard = ({ front: Front, back: Back }) => (
         <div className="flip-card-front">
           <Front />
         </div>
-        <div  className='flip-card-back' style={{marginTop: 16}}>
+        <div className="flip-card-back" style={{ marginTop: 16 }}>
           <Back />
         </div>
       </div>

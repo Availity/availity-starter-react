@@ -10,7 +10,9 @@ import MemberCard from './MemberCard';
 
 const Item = ({ name, value, children, className, ...rest }) => (
   <Grid container justifyContent="space-between" {...rest}>
-    <Typography fontWeight="bold" textTransform="uppercase" >{name}</Typography>
+    <Typography fontWeight="bold" textTransform="uppercase">
+      {name}
+    </Typography>
     {children || <span>{value}</span>}
   </Grid>
 );
@@ -23,7 +25,9 @@ Item.propTypes = {
 };
 
 async function stall(stallTime = 3000) {
-  await new Promise((resolve) => { setTimeout(resolve, stallTime) });
+  await new Promise((resolve) => {
+    setTimeout(resolve, stallTime);
+  });
 }
 
 async function fetchMember({ memberId, zipCode }) {
@@ -45,24 +49,24 @@ const MemberInfo = () => {
         <Card style={{ height: 293, maxWidth: 600 }}>
           <CardHeader title="Front" />
           <CardContent>
-            <Grid container  style={{ height: '100%' }} justifyContent='space-between'>
-              <Grid direction="column" size={{xs: 5}}>
+            <Grid container style={{ height: '100%' }} justifyContent="space-between">
+              <Grid direction="column" size={{ xs: 5 }}>
                 <Item name="Name" value={member.name || 'N/A'} />
                 <Item name="Member Number" value={member.memberId || 'N/A'} />
-                <Divider sx={{marginTop: '24px'}} />
+                <Divider sx={{ marginTop: '24px' }} />
               </Grid>
-              <Grid direction="column" size={{xs: 6}}>
+              <Grid direction="column" size={{ xs: 6 }}>
                 <Item name="Group NO" value="MEDIRIX" />
                 <Item name="Plan Code" value="455" />
                 <Item name="CMS" value="H125353" />
                 <Divider />
               </Grid>
-              <Grid direction="column" size={{xs: 5}}>
+              <Grid direction="column" size={{ xs: 5 }}>
                 <Item name="FHCP NPI" value="3351244245" />
                 <Item name="Effective" value="14 May 2019" />
                 <Item name="D.O.B" value="21 Dec 1960" />
               </Grid>
-              <Grid direction="column" size={{xs: 6}}>
+              <Grid direction="column" size={{ xs: 6 }}>
                 <Item name="RX Group" value="FHTP GS" />
                 <Item name="RX ID" value="455" />
                 <Item name="Rx BIN" value="31" />
@@ -74,18 +78,18 @@ const MemberInfo = () => {
       )}
       back={() => (
         <Card style={{ height: 293, maxWidth: 600 }}>
-          <CardHeader title="Back"  />
+          <CardHeader title="Back" />
           <CardContent>
             <Grid container style={{ height: '100%' }} justifyContent="space-between">
-              <Grid direction="column" size={{xs: 7}} className="mb-2 pb-2">
+              <Grid direction="column" size={{ xs: 7 }} className="mb-2 pb-2">
                 <Item name="Members">
                   <span className="pl-3">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua.
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
+                    et dolore magna aliqua.
                   </span>
                 </Item>
               </Grid>
-              <Grid direction="column" size={{xs: 4}} className="mb-2 pb-2">
+              <Grid direction="column" size={{ xs: 4 }} className="mb-2 pb-2">
                 <Item name="Group NO" value="MEDIRIX" />
                 <Item name="Plan Code" value="455" />
                 <Item name="CMS" value="H125353" />

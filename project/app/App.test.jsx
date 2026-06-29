@@ -1,3 +1,4 @@
+import { vi } from 'vitest';
 import React from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
 import { MemoryRouter as Router, Route, Routes } from 'react-router-dom';
@@ -6,13 +7,12 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import App from './App';
 import { ContextProvider } from './context';
 
-jest.mock('axios');
+vi.mock('axios');
 
 const queryClient = new QueryClient();
 
 describe('ID Card Viewer', () => {
   test('renders', async () => {
-
     render(
       <ContextProvider>
         <QueryClientProvider client={queryClient}>
@@ -26,8 +26,8 @@ describe('ID Card Viewer', () => {
     );
 
     await waitFor(() => {
-      screen.getByTestId('sso-container');
-      screen.getAllByText('ID Card Viewer');
+      expect(screen.getByTestId('sso-container')).toBeDefined();
+      expect(screen.getAllByText('ID Card Viewer')).toBeDefined();
     });
   });
 });
