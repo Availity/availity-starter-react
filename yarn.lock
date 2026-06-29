@@ -5699,7 +5699,7 @@ __metadata:
     browserslist: "npm:4.28.4"
     caniuse-lite: "npm:1.0.30001799"
     cross-env: "npm:^10.1.0"
-    eslint-config-availity: "npm:^15.0.0"
+    eslint-config-availity: "npm:^15.1.1"
     prettier: "npm:^3.9.3"
     prop-types: "npm:^15.8.1"
     query-string: "npm:^9.4.1"
@@ -7738,9 +7738,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-config-availity@portal:/Users/jordan.young/Workspaces/eslint-config-availity::locator=availity-starter-react%40workspace%3A.":
-  version: 0.0.0-use.local
-  resolution: "eslint-config-availity@portal:/Users/jordan.young/Workspaces/eslint-config-availity::locator=availity-starter-react%40workspace%3A."
+"eslint-config-availity@npm:^15.1.1":
+  version: 15.1.1
+  resolution: "eslint-config-availity@npm:15.1.1"
   dependencies:
     "@eslint/compat": "npm:^2.1.0"
     "@eslint/eslintrc": "npm:^3.3.5"
@@ -7764,8 +7764,9 @@ __metadata:
   peerDependenciesMeta:
     typescript:
       optional: true
+  checksum: 10c0/43b7bd6e8c3f8de3d845c346774c7adf1ba152d52f173ab78de1c5f4a9bc0a32353da350c502e14c53481349ddabb8626b005f632edd99de678bfea93153ad0d
   languageName: node
-  linkType: soft
+  linkType: hard
 
 "eslint-config-prettier@npm:^10.1.8":
   version: 10.1.8

@@ -55,7 +55,7 @@
     "@types/react": "^19.2.17",
     "@types/react-dom": "^19.2.3",
     "cross-env": "^10.1.0",
-    "eslint-config-availity": "^15.0.0",
+    "eslint-config-availity": "^15.1.1",
     "prettier": "^3.9.3",
     "typescript": "^5.9.3"
   },
@@ -68,8 +68,5 @@
   "type": "module",
   "engines": {
     "node": "^22.0.0 || ^24.0.0"
-  },
-  "resolutions": {
-    "eslint-config-availity": "portal:/Users/jordan.young/Workspaces/eslint-config-availity"
   }
 }
