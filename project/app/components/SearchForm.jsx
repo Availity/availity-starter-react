@@ -6,7 +6,9 @@ import { useForm } from 'react-hook-form';
 import { useAppContext } from '@/context';
 
 async function stall(stallTime = 3000) {
-  await new Promise((resolve) => { setTimeout(resolve, stallTime) });
+  await new Promise((resolve) => {
+    setTimeout(resolve, stallTime);
+  });
 }
 
 async function fetchMember({ memberId, zipCode }) {
@@ -37,7 +39,7 @@ const SearchForm = () => {
     formState: { errors },
     handleSubmit,
     register,
-  } = useForm({defaultValues: form});
+  } = useForm({ defaultValues: form });
 
   const onSubmit = async (values) => {
     getMember(values, {
@@ -50,15 +52,35 @@ const SearchForm = () => {
 
   return (
     <BlockUi blocking={isLoading}>
-      <Card sx={{padding: '1rem'}}>
+      <Card sx={{ padding: '1rem' }}>
         <Collapse in={!!errors.memberId || !!errors.zipCode}>
-          <Alert severity="error" sx={{marginBottom: '1rem'}}>
+          <Alert severity="error" sx={{ marginBottom: '1rem' }}>
             An error occurred
           </Alert>
         </Collapse>
         <form onSubmit={handleSubmit(onSubmit)}>
-          <TextField name="memberId" type="text" label="Member ID" error={!!errors.memberId} helperText={errors.memberId?.message} {...register('memberId', {required: 'This field is required.', pattern: {value: /^\d{8}$/, message: 'Member ID must be 8 digits.'}})} />
-          <TextField name="zipCode" type="text" label="Zip Code" error={!!errors.zipCode} helperText={errors.zipCode?.message} {...register('zipCode', {required: 'This field is required.', pattern:{value: /^\d{5}(?:-\d{4})?$/, message: 'Valid Zip Code Formats: 12345 or 12345-6789'}})} />
+          <TextField
+            name="memberId"
+            type="text"
+            label="Member ID"
+            error={!!errors.memberId}
+            helperText={errors.memberId?.message}
+            {...register('memberId', {
+              required: 'This field is required.',
+              pattern: { value: /^\d{8}$/, message: 'Member ID must be 8 digits.' },
+            })}
+          />
+          <TextField
+            name="zipCode"
+            type="text"
+            label="Zip Code"
+            error={!!errors.zipCode}
+            helperText={errors.zipCode?.message}
+            {...register('zipCode', {
+              required: 'This field is required.',
+              pattern: { value: /^\d{5}(?:-\d{4})?$/, message: 'Valid Zip Code Formats: 12345 or 12345-6789' },
+            })}
+          />
           <Grid container justifyContent="end">
             <Button type="submit" color="primary">
               View Member Card

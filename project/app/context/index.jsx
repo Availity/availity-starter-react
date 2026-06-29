@@ -14,15 +14,19 @@ export const ContextProvider = ({ children }) => {
   const [hasMemberInfo, setHasMemberInfo] = useState(false);
   const [form, setForm] = useState({ memberId: '', zipCode: '' });
 
-  const globalContext = useMemo(() => ({
-    form, setForm, loading, setLoading, hasMemberInfo, setHasMemberInfo,
-  }), [form, loading, hasMemberInfo])
-
-  return (
-    <context.Provider value={globalContext}>
-      {children}
-    </context.Provider>
+  const globalContext = useMemo(
+    () => ({
+      form,
+      setForm,
+      loading,
+      setLoading,
+      hasMemberInfo,
+      setHasMemberInfo,
+    }),
+    [form, loading, hasMemberInfo]
   );
+
+  return <context.Provider value={globalContext}>{children}</context.Provider>;
 };
 
 ContextProvider.propTypes = {

@@ -16,16 +16,16 @@ yarn start
 
 ## Scripts
 
-| Script | Description |
-| --- | --- |
-| `yarn start` | Start the development server |
-| `yarn build` | Build for development |
-| `yarn build:production` | Build for production |
-| `yarn test` | Run tests (Vitest) |
-| `yarn test:watch` | Run tests in watch mode |
-| `yarn test:coverage` | Run tests with coverage |
-| `yarn lint` | Lint source files (ESLint) |
-| `yarn format` | Format files (Prettier) |
+| Script                  | Description                  |
+| ----------------------- | ---------------------------- |
+| `yarn start`            | Start the development server |
+| `yarn build`            | Build for development        |
+| `yarn build:production` | Build for production         |
+| `yarn test`             | Run tests (Vitest)           |
+| `yarn test:watch`       | Run tests in watch mode      |
+| `yarn test:coverage`    | Run tests with coverage      |
+| `yarn lint`             | Lint source files (ESLint)   |
+| `yarn format`           | Format files (Prettier)      |
 
 ## Project Structure
 
@@ -43,11 +43,11 @@ project/
 
 ## Configuration
 
-| File | Purpose |
-| --- | --- |
-| `project/config/workflow.js` | Dev server, webpack, and build configuration |
-| `eslint.config.js` | ESLint flat config |
-| `tsconfig.json` | TypeScript configuration (type-checking only) |
+| File                         | Purpose                                       |
+| ---------------------------- | --------------------------------------------- |
+| `project/config/workflow.js` | Dev server, webpack, and build configuration  |
+| `eslint.config.js`           | ESLint flat config                            |
+| `tsconfig.json`              | TypeScript configuration (type-checking only) |
 
 This project uses ESM (`"type": "module"` in package.json). All config files use `import`/`export` syntax.
 

@@ -13,7 +13,6 @@ const queryClient = new QueryClient();
 
 describe('ID Card Viewer', () => {
   test('renders', async () => {
-
     render(
       <ContextProvider>
         <QueryClientProvider client={queryClient}>
