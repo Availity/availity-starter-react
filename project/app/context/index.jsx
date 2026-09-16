@@ -10,7 +10,6 @@ export const useAppContext = () => {
 };
 
 export const ContextProvider = ({ children }) => {
-  const [loading, setLoading] = useState(false);
   const [hasMemberInfo, setHasMemberInfo] = useState(false);
   const [form, setForm] = useState({ memberId: '', zipCode: '' });
 
@@ -18,12 +17,10 @@ export const ContextProvider = ({ children }) => {
     () => ({
       form,
       setForm,
-      loading,
-      setLoading,
       hasMemberInfo,
       setHasMemberInfo,
     }),
-    [form, loading, hasMemberInfo]
+    [form, hasMemberInfo]
   );
 
   return <context.Provider value={globalContext}>{children}</context.Provider>;
