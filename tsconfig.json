@@ -1,26 +1,21 @@
 {
   "compilerOptions": {
+    "target": "ES2020",
+    "lib": ["ES2020", "dom", "dom.iterable"],
+    "module": "ESNext",
+    "moduleResolution": "bundler",
     "jsx": "react",
-    "target": "es2020",
-    "lib": ["es2020", "dom", "dom.iterable"],
-    "experimentalDecorators": false,
-    "emitDecoratorMetadata": false,
-    "module": "node16",
-    "moduleResolution": "node16",
-    "baseUrl": ".",
     "paths": {
       "@/*": ["./project/app/*"]
     },
     "resolveJsonModule": true,
     "allowJs": true,
     "checkJs": false,
-    "sourceMap": true,
-    "removeComments": true,
-    "importHelpers": true,
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "noImplicitAny": true,
+    "isolatedModules": true,
     "types": ["vitest/globals"],
     "skipLibCheck": true,
     "noEmit": true

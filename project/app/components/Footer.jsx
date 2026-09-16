@@ -1,4 +1,3 @@
-import React from 'react';
 import { HeartIcon, Link, Typography } from '@availity/element';
 
 const currentYear = new Date().getFullYear();

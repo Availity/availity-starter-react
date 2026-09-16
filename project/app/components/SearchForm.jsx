@@ -1,30 +1,28 @@
-import React from 'react';
 import { Alert, BlockUi, Button, Card, Grid, TextField, Collapse } from '@availity/element';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useForm } from 'react-hook-form';
+import * as yup from 'yup';
+import { yupResolver } from '@hookform/resolvers/yup';
 
+import { fetchMember } from '@/api/member';
 import { useAppContext } from '@/context';
 
-async function stall(stallTime = 3000) {
-  await new Promise((resolve) => {
-    setTimeout(resolve, stallTime);
-  });
-}
-
-async function fetchMember({ memberId, zipCode }) {
-  await stall();
-  if (memberId[0] === '1') throw new Error('Member ID cannot start with a 1');
-  return {
-    memberId,
-    zipCode,
-    name: 'John Doe',
-  };
-}
+const schema = yup.object({
+  memberId: yup
+    .string()
+    .required('This field is required.')
+    .matches(/^\d{8}$/, 'Member ID must be 8 digits.'),
+  zipCode: yup
+    .string()
+    .required('This field is required.')
+    .matches(/^\d{5}(?:-\d{4})?$/, 'Valid Zip Code Formats: 12345 or 12345-6789'),
+});
 
 function useFetchMember() {
   const queryClient = useQueryClient();
 
-  return useMutation(fetchMember, {
+  return useMutation({
+    mutationFn: fetchMember,
     onSuccess: (data, variables) => {
       queryClient.setQueryData(['member', variables], data);
     },
@@ -32,16 +30,16 @@ function useFetchMember() {
 }
 
 const SearchForm = () => {
-  const { mutate: getMember, isLoading } = useFetchMember();
+  const { mutate: getMember, isPending, isError } = useFetchMember();
   const { setHasMemberInfo, form, setForm } = useAppContext();
 
   const {
     formState: { errors },
     handleSubmit,
     register,
-  } = useForm({ defaultValues: form });
+  } = useForm({ defaultValues: form, resolver: yupResolver(schema) });
 
-  const onSubmit = async (values) => {
+  const onSubmit = (values) => {
     getMember(values, {
       onSuccess: () => {
         setForm(values);
@@ -51,11 +49,11 @@ const SearchForm = () => {
   };
 
   return (
-    <BlockUi blocking={isLoading}>
+    <BlockUi blocking={isPending}>
       <Card sx={{ padding: '1rem' }}>
-        <Collapse in={!!errors.memberId || !!errors.zipCode}>
+        <Collapse in={isError || !!errors.memberId || !!errors.zipCode}>
           <Alert severity="error" sx={{ marginBottom: '1rem' }}>
-            An error occurred
+            {isError ? 'Member not found. Please check your details.' : 'Please correct the errors below.'}
           </Alert>
         </Collapse>
         <form onSubmit={handleSubmit(onSubmit)}>
@@ -65,10 +63,7 @@ const SearchForm = () => {
             label="Member ID"
             error={!!errors.memberId}
             helperText={errors.memberId?.message}
-            {...register('memberId', {
-              required: 'This field is required.',
-              pattern: { value: /^\d{8}$/, message: 'Member ID must be 8 digits.' },
-            })}
+            {...register('memberId')}
           />
           <TextField
             name="zipCode"
@@ -76,10 +71,7 @@ const SearchForm = () => {
             label="Zip Code"
             error={!!errors.zipCode}
             helperText={errors.zipCode?.message}
-            {...register('zipCode', {
-              required: 'This field is required.',
-              pattern: { value: /^\d{5}(?:-\d{4})?$/, message: 'Valid Zip Code Formats: 12345 or 12345-6789' },
-            })}
+            {...register('zipCode')}
           />
           <Grid container justifyContent="end">
             <Button type="submit" color="primary">

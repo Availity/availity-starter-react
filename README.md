@@ -4,7 +4,7 @@
 
 ## Requirements
 
-- Node.js 22+
+- Node.js 22+ or 24+
 - Yarn 4+
 
 ## Getting Started
@@ -21,11 +21,14 @@ yarn start
 | `yarn start`            | Start the development server |
 | `yarn build`            | Build for development        |
 | `yarn build:production` | Build for production         |
+| `yarn build:staging`    | Build for staging            |
 | `yarn test`             | Run tests (Vitest)           |
 | `yarn test:watch`       | Run tests in watch mode      |
 | `yarn test:coverage`    | Run tests with coverage      |
 | `yarn lint`             | Lint source files (ESLint)   |
 | `yarn format`           | Format files (Prettier)      |
+| `yarn format:check`     | Check formatting             |
+| `yarn typecheck`        | Type-check with TypeScript   |
 
 ## Project Structure
 
@@ -34,20 +37,22 @@ project/
 ├── app/
 │   ├── index.jsx          # App entry point
 │   ├── App.jsx            # Root component with routing
-│   ├── components/        # Shared components
+│   ├── components/        # Shared components (SearchForm, MemberCard, etc.)
 │   ├── context/           # React Context providers
-│   └── hooks/             # Custom hooks
-└── config/
-    └── workflow.js        # Workflow configuration
+│   └── api/               # API and data-fetching utilities
+├── config/
+│   ├── workflow.js        # Workflow configuration
+│   └── routes.json        # Mock server route mappings
+└── data/
+    └── spaces.json        # Mock spaces data
 ```
 
 ## Configuration
 
-| File                         | Purpose                                       |
-| ---------------------------- | --------------------------------------------- |
-| `project/config/workflow.js` | Dev server, webpack, and build configuration  |
-| `eslint.config.js`           | ESLint flat config                            |
-| `tsconfig.json`              | TypeScript configuration (type-checking only) |
+| File                         | Purpose                                      |
+| ---------------------------- | -------------------------------------------- |
+| `project/config/workflow.js` | Dev server, webpack, and build configuration |
+| `eslint.config.js`           | ESLint flat config                           |
 
 This project uses ESM (`"type": "module"` in package.json). All config files use `import`/`export` syntax.
 
@@ -56,6 +61,7 @@ This project uses ESM (`"type": "module"` in package.json). All config files use
 - **Build/Dev**: [@availity/workflow](https://github.com/Availity/availity-workflow) (webpack + esbuild)
 - **Components**: [@availity/element](https://availity.github.io/element/) (MUI-based design system)
 - **Data Fetching**: [@tanstack/react-query](https://tanstack.com/query)
+- **Forms**: [react-hook-form](https://react-hook-form.com/) + [yup](https://github.com/jquense/yup)
 - **Routing**: [react-router-dom](https://reactrouter.com/)
 - **Testing**: [Vitest](https://vitest.dev/) + [@testing-library/react](https://testing-library.com/docs/react-testing-library/intro/)
 - **Linting**: [eslint-config-availity](https://github.com/Availity/eslint-config-availity) (flat config)
@@ -68,12 +74,12 @@ This template uses React Context for state and `@tanstack/react-query` for serve
 
 ```jsx
 import { useQuery } from '@tanstack/react-query';
-import AvUsersApi from '@availity/api-axios';
+import { avUserApi } from '@availity/api-axios';
 
 const useCurrentUser = () =>
   useQuery({
     queryKey: ['user'],
-    queryFn: () => AvUsersApi.me(),
+    queryFn: () => avUserApi.me(),
   });
 
 const Component = () => {
@@ -81,7 +87,7 @@ const Component = () => {
 
   if (isLoading) return null;
 
-  return <p>{user ? user.name : 'A user has no name'}</p>;
+  return <p>{user ? user.firstName : 'A user has no name'}</p>;
 };
 ```
 
