@@ -1,7 +1,7 @@
 import { Button, Container, Grid, PageHeader, Spaces } from '@availity/element';
 import { useSearchParams } from 'react-router';
 
-import { Footer, MemberInfo, SearchForm } from '@/components';
+import { CurrentUser, Footer, MemberInfo, SearchForm } from '@/components';
 import { useAppContext } from '@/context';
 
 const App = () => {
@@ -13,6 +13,7 @@ const App = () => {
     <Container data-testid="sso-container">
       <Spaces spaceIds={[spaceId]} clientId="test">
         <PageHeader headerText="ID Card Viewer" breadcrumbs={{ active: 'ID Card Viewer' }} />
+        <CurrentUser />
         <Grid container justifyContent="center">
           {hasMemberInfo ? (
             <Grid container direction="column">
