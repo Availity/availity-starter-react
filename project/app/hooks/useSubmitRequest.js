@@ -1,4 +1,5 @@
 import { useMutation } from '@tanstack/react-query';
+import AvApi from '@availity/api-axios';
 
 /**
  * @typedef {Object} RequestPayload
@@ -14,21 +15,16 @@ import { useMutation } from '@tanstack/react-query';
  * @property {string} submittedAt
  */
 
-// Replace with a real API call (for example, an @availity/api-axios resource).
-// A write, so it goes through useMutation, not useQuery.
+// Placeholder endpoint. Mocked by Ekko (see config/routes.json and data/submission.json).
+// Replace with your real resource. A write, so it goes through useMutation, not useQuery.
 /**
  * @param {RequestPayload} payload
  * @returns {Promise<Submission>}
  */
 const submitRequest = async (payload) => {
-  await new Promise((resolve) => {
-    setTimeout(resolve, 500);
-  });
-  return {
-    id: `REF-${payload.name.slice(0, 2).toUpperCase()}${Math.random().toString(36).slice(2, 6).toUpperCase()}`,
-    status: 'Received',
-    submittedAt: new Date().toLocaleString(),
-  };
+  const submissionApi = new AvApi({ api: false, url: '/cloud/fake/route' });
+  const response = await submissionApi.create(payload);
+  return response.data;
 };
 
 export const useSubmitRequest = () => useMutation({ mutationFn: submitRequest });
