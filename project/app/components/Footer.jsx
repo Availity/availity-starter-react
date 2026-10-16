@@ -1,17 +1,15 @@
-import { HeartIcon, Link, Typography } from '@availity/element';
+import { Link, HeartIcon, Typography, Stack } from '@availity/element';
 
-const currentYear = new Date().getFullYear();
+const year = new Date().getFullYear();
 
-const Footer = () => (
-  <Typography margin={2} textAlign="center">
-    Made with
-    <HeartIcon name="heart" color="error" sx={{ marginLeft: 1, marginRight: 1 }} />
-    by
-    <Link href="https://www.availity.com" target="_blank" marginLeft={1} marginRight={1}>
-      Availity
-    </Link>
-    {currentYear}
-  </Typography>
+export const Footer = () => (
+  <Stack direction="row" justifyContent="center" mt="1.5rem">
+    <Typography>
+      Made with <HeartIcon color="error" /> at
+      <Link href="https://www.availity.com" target="_blank" iconPosition="end">
+        Availity
+      </Link>{' '}
+      {year}
+    </Typography>
+  </Stack>
 );
-
-export default Footer;

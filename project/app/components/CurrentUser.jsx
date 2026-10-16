@@ -1,8 +1,8 @@
 import { Typography } from '@availity/element';
 
-import { useCurrentUser } from '@/hooks/useCurrentUser';
+import { useCurrentUser } from '../hooks/useCurrentUser';
 
-const CurrentUser = () => {
+export const CurrentUser = () => {
   const { data, isPending, isError } = useCurrentUser();
 
   if (isPending) return <Typography>Loading user...</Typography>;
@@ -10,5 +10,3 @@ const CurrentUser = () => {
 
   return <Typography>Signed in as {`${data.firstName} ${data.lastName}`}</Typography>;
 };
-
-export default CurrentUser;

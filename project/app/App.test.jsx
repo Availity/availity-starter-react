@@ -1,73 +1,53 @@
-import { vi } from 'vitest';
-import { render, screen, waitFor } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
-import { MemoryRouter as Router, Route, Routes } from 'react-router';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { render, screen } from '@testing-library/react';
+import { MemoryRouter as Router } from 'react-router';
+import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
+import { avUserApi } from '@availity/api-axios';
 
 import App from './App';
-import { ContextProvider } from './context';
 
-vi.mock('axios');
+vi.mock('@availity/api-axios', () => ({
+  avUserApi: { me: vi.fn().mockResolvedValue({ firstName: 'Jane', lastName: 'Smith' }) },
+}));
 
-// Mock Spaces to avoid network calls in tests
+/** @typedef {{ children?: import('react').ReactNode }} SpacesProps */
+
 vi.mock('@availity/element', async () => {
   const actual = await vi.importActual('@availity/element');
   return {
     ...actual,
     // eslint-disable-next-line react/prop-types
-    Spaces: ({ children }) => <div data-testid="spaces-mock">{children}</div>,
+    Spaces: (/** @type {SpacesProps} */ { children }) => <div data-testid="spaces-mock">{children}</div>,
   };
 });
 
-const createQueryClient = () =>
-  new QueryClient({ defaultOptions: { queries: { retry: false }, mutations: { retry: false } } });
-
 const renderApp = (route = '/') =>
   render(
-    <ContextProvider>
-      <QueryClientProvider client={createQueryClient()}>
-        <Router initialEntries={[route]}>
-          <Routes>
-            <Route path="/*" element={<App />} />
-          </Routes>
-        </Router>
-      </QueryClientProvider>
-    </ContextProvider>
+    <QueryClientProvider client={new QueryClient({ defaultOptions: { queries: { retry: false } } })}>
+      <Router initialEntries={[route]}>
+        <App />
+      </Router>
+    </QueryClientProvider>
   );
 
-describe('ID Card Viewer', () => {
-  test('renders the app container', () => {
-    renderApp();
-    expect(screen.getByTestId('sso-container')).toBeInTheDocument();
-  });
-
+describe('App', () => {
   test('renders the page header', () => {
     renderApp();
-    expect(screen.getByRole('heading', { name: /ID Card Viewer/i })).toBeInTheDocument();
+    expect(screen.getByText('My Application')).toBeInTheDocument();
   });
 
-  test('renders the search form by default', () => {
+  test('renders the app container', () => {
     renderApp();
-    expect(screen.getByLabelText(/Member ID/i)).toBeInTheDocument();
-    expect(screen.getByLabelText(/Zip Code/i)).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: /View Member Card/i })).toBeInTheDocument();
+    expect(screen.getByTestId('app-container')).toBeInTheDocument();
   });
 
-  test('passes spaceId from URL to Spaces component', () => {
-    renderApp('/?spaceId=12345');
-    expect(screen.getByTestId('spaces-mock')).toBeInTheDocument();
-  });
-
-  test('shows validation errors when submitting empty form', async () => {
-    const user = userEvent.setup();
+  test('renders the footer', () => {
     renderApp();
+    expect(screen.getByText(/Availity/)).toBeInTheDocument();
+  });
 
-    await user.click(screen.getByRole('button', { name: /View Member Card/i }));
-
-    await waitFor(() => {
-      // Both fields are required — getAllByText handles multiple matches
-      const errors = screen.getAllByText('This field is required.');
-      expect(errors.length).toBeGreaterThan(0);
-    });
+  test('loads the current user', async () => {
+    renderApp();
+    expect(await screen.findByText('Signed in as Jane Smith')).toBeInTheDocument();
+    expect(avUserApi.me).toHaveBeenCalled();
   });
 });

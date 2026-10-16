@@ -1,9 +1,8 @@
 import { render, screen } from '@testing-library/react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { avUserApi } from '@availity/api-axios';
-import { vi } from 'vitest';
 
-import CurrentUser from './CurrentUser';
+import { CurrentUser } from './CurrentUser';
 
 vi.mock('@availity/api-axios', () => ({
   avUserApi: { me: vi.fn() },
@@ -18,13 +17,13 @@ const renderWithClient = () =>
 
 describe('CurrentUser', () => {
   test('shows the signed-in user name', async () => {
-    avUserApi.me.mockResolvedValue({ firstName: 'Jane', lastName: 'Smith' });
+    vi.mocked(avUserApi.me).mockResolvedValue({ firstName: 'Jane', lastName: 'Smith' });
     renderWithClient();
     expect(await screen.findByText('Signed in as Jane Smith')).toBeInTheDocument();
   });
 
   test('shows an error when the user request fails', async () => {
-    avUserApi.me.mockRejectedValue(new Error('boom'));
+    vi.mocked(avUserApi.me).mockRejectedValue(new Error('boom'));
     renderWithClient();
     expect(await screen.findByText('Could not load user.')).toBeInTheDocument();
   });
