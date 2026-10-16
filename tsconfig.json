@@ -16,7 +16,7 @@
     "forceConsistentCasingInFileNames": true,
     "noImplicitAny": true,
     "isolatedModules": true,
-    "types": ["vitest/globals"],
+    "types": ["vitest/globals", "@availity/workflow/globals"],
     "skipLibCheck": true,
     "noEmit": true
   },
