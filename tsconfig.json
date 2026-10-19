@@ -1,24 +1,24 @@
 {
   "compilerOptions": {
     "target": "ES2020",
-    "lib": ["ES2020", "dom", "dom.iterable"],
+    "lib": ["dom", "dom.iterable", "ESNext"],
     "module": "ESNext",
     "moduleResolution": "bundler",
     "jsx": "react-jsx",
     "paths": {
       "@/*": ["./project/app/*"]
     },
-    "resolveJsonModule": true,
     "allowJs": true,
-    "checkJs": false,
+    "checkJs": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
-    "noImplicitAny": true,
-    "isolatedModules": true,
-    "types": ["vitest/globals"],
+    "strict": true,
+    "types": ["vitest/globals", "@availity/workflow/globals"],
     "skipLibCheck": true,
     "noEmit": true
   },
-  "exclude": ["node_modules", "dist", "build"]
+  "include": ["project/app"]
 }

@@ -1,10 +1,9 @@
 import { createRoot } from 'react-dom/client';
-import { HashRouter as Router, Route, Routes } from 'react-router';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { HashRouter as Router } from 'react-router';
 import { ThemeProvider } from '@availity/element';
+import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
 
 import App from './App';
-import { ContextProvider } from './context';
 
 const container = document.getElementById('root');
 if (!container) throw new Error('Unable to find root node');
@@ -14,6 +13,7 @@ const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
       refetchOnWindowFocus: false,
+      // Data is considered fresh for 5 minutes. Adjust per your app's needs.
       staleTime: 5 * 60 * 1000,
     },
   },
@@ -21,14 +21,10 @@ const queryClient = new QueryClient({
 
 root.render(
   <ThemeProvider>
-    <ContextProvider>
-      <QueryClientProvider client={queryClient}>
-        <Router>
-          <Routes>
-            <Route path="/*" element={<App />} />
-          </Routes>
-        </Router>
-      </QueryClientProvider>
-    </ContextProvider>
+    <QueryClientProvider client={queryClient}>
+      <Router>
+        <App />
+      </Router>
+    </QueryClientProvider>
   </ThemeProvider>
 );

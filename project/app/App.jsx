@@ -1,34 +1,34 @@
-import { Button, Container, Grid, PageHeader, Spaces } from '@availity/element';
-import { useSearchParams } from 'react-router';
+import { Routes, Route, useSearchParams } from 'react-router';
+import { Container, PageHeader, Spaces } from '@availity/element';
 
-import { Footer, MemberInfo, SearchForm } from '@/components';
-import { useAppContext } from '@/context';
+import { CurrentUser, ErrorBoundary, Footer } from '@/components';
+import { Request } from '@/Request';
+import { Response } from '@/Response';
 
 const App = () => {
   const [searchParams] = useSearchParams();
   const spaceId = searchParams.get('spaceId') || '';
-  const { hasMemberInfo, setHasMemberInfo } = useAppContext();
 
   return (
-    <Container data-testid="sso-container">
+    <Container data-testid="app-container" id="app-container">
       <Spaces spaceIds={[spaceId]} clientId="test">
-        <PageHeader headerText="ID Card Viewer" breadcrumbs={{ active: 'ID Card Viewer' }} />
-        <Grid container justifyContent="center">
-          {hasMemberInfo ? (
-            <Grid container direction="column">
-              <MemberInfo />
-              <Grid container justifyContent="end" mt={3}>
-                <Button onClick={() => setHasMemberInfo(false)} color="primary">
-                  Go Back
-                </Button>
-              </Grid>
-            </Grid>
-          ) : (
-            <SearchForm />
-          )}
-        </Grid>
+        {/* TODO: Replace headerText, breadcrumbs, and help with your app's values */}
+        <PageHeader
+          breadcrumbs={{ active: 'Request Form' }}
+          headerText="My Application"
+          help={{ helpAppName: 'My Application', url: 'https://design.availity.com' }}
+        />
+        <Container>
+          <CurrentUser />
+          <ErrorBoundary>
+            <Routes>
+              <Route path="/" element={<Request />} />
+              <Route path="/response" element={<Response />} />
+            </Routes>
+          </ErrorBoundary>
+          <Footer />
+        </Container>
       </Spaces>
-      <Footer />
     </Container>
   );
 };
